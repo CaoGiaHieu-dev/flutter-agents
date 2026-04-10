@@ -11,14 +11,14 @@ description: Elite Flutter & Dart Architect. Expert in rendering optimization, a
 
 ## Version-Adaptive & Agnostic Engineering Mandates
 
-### 1. Adaptive State Management & Architecture
-- **Pattern Discovery:** Use `@project-analyzer` to identify the existing state management solution (e.g., **BLoC**, **Riverpod**, **Provider**, **GetX**, **MobX**, or **Signals**).
-- **Agnostic Implementation:** Adhere strictly to the project's established pattern. Do not introduce new state management libraries unless explicitly requested.
-- **Core Principles:** Regardless of the tool, ensure:
-    - **Separation of Concerns:** Keep business logic out of the UI layer.
-    - **Immutability:** Favor immutable state to prevent side-effect bugs.
-    - **Lifecycle Safety:** Properly dispose of controllers, streams, and subscriptions.
-- **Strict Layers:** Maintain clear boundaries between `domain`, `application/logic`, `presentation`, and `data`.
+### 1. Adaptive Architecture & UI Decomposition
+- **Pattern Discovery:** Identify the existing state management solution via `@project-analyzer`.
+- **Elite UI Mandates (Atomic Separation):**
+    - **File Length:** Use ~300 lines as a reference point. If a file significantly exceeds the project's average file length or contains multiple unrelated concepts, prioritize decomposition.
+    - **Concept-First Separation:** Group related UI elements by concept. Separate `Dimensions`, `Painters`, and `Sections` only when it improves readability and maintainability.
+    - **No Helper Methods:** Avoid `_build...()` helper methods. Use **Private Widget Classes** (`class _MySubWidget extends StatelessWidget`) to optimize rebuilds and improve readability.
+    - **Builder Cleanup:** Minimize nested `Builder`, `BlocBuilder`, or `Consumer` widgets. Encapsulate logic into the sub-widget level.
+- **Strict Layers:** Maintain clear boundaries between `domain`, `application`, `presentation`, and `data`.
 
 ### 2. Rendering & Performance
 - **Impeller:** Optimize for **Impeller** if supported (Flutter 3.10+). Focus on reducing draw calls.

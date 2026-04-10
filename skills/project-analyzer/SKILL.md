@@ -1,37 +1,35 @@
 ---
 name: project-analyzer
-description: Elite Project Context & Structural Architect. Maps code symbols, detects conventions, and optimizes context usage through turn compression. No Git allowed.
+description: Elite Project Context & Structural Architect. Maps code symbols, detects conventions, and optimizes context usage. No Git allowed.
 ---
 # Elite Project Context & Structural Architect Protocol
 
-## When to use this skill
-- **Initialization:** Deep dive into a new or complex codebase.
-- **Context Sync:** Before major changes to ensure structural integrity.
-- **Strategic Mapping:** To identify "what is where" without reading every file.
-
 ## Elite Analysis Workflow (No Git)
 
-### 1. Structural Symbol Mapping
-- **Symbol Discovery:** Use `grep_search` with regex to map key symbols (Classes, Interfaces, Main Functions, Providers/Blocs) across the project. 
-- **Relationship Tracing:** Identify how core components interact (e.g., "Feature A depends on Service B").
-- **Physical Map:** Use `list_directory` to understand the nesting depth and architectural boundaries.
+### 1. Persistence & Memory Recovery
+- **Memory Audit:** First, check for `AGENT_MEMORY.md`, `.cursor/rules`, or `CLAUDE.md`. Load persistent project facts, architectural decisions, and previously declined upgrades to avoid redundant suggestions.
+- **Fact Updates:** If a new architectural decision is made, instruct `@docs-architect` to update the memory file.
+
+### 2. Structural Symbol & Layer Mapping
+- **Symbol Discovery:** Map key symbols via `grep_search`.
+- **Layer Hierarchy Identification:** Explicitly define the project's vertical hierarchy.
 
 ### 2. Turn Compression & Efficiency
-- **Context-Rich Searching:** When searching, ALWAYS use `context`, `before`, or `after` parameters in `grep_search`. This allows understanding code blocks in a SINGLE turn, bypassing redundant `read_file` calls.
-- **Predictive Discovery:** Anticipate related files. If reading a `Controller`, immediately check for the corresponding `Service` or `Repository` in the same turn.
+- **Context-Rich Searching:** Use `context`, `before`, and `after` in `grep_search` to understand blocks in a single turn.
+- **Predictive Discovery:** Anticipate related layer files.
 
 ### 3. Convention & Tooling Audit
-- **Rule Enforcement:** Detect `analysis_options.yaml`, `.editorconfig`, `pyproject.toml`, etc. **Local Conventions > General Rules**.
-- **Tooling Map:** Identify the project's native CLI tools (`Makefile`, `npm`, `dart`, `gradle`) for formatting and analysis.
+- **Rule Enforcement:** Detect `analysis_options.yaml`, `.editorconfig`, etc.
+- **Convention Gap Report:** Identify differences between local rules and elite best practices.
 
 ## Deliverables: The "Elite Context Snapshot"
-1. **Structural Map:** Key symbols and their locations.
-2. **Convention Rules:** Strictness level and formatting tools.
-3. **Convention Gap Report:** Identify where local rules differ from industry best practices (e.g., "Project uses manual DI, but Elite recommends Hilt/Riverpod for X reason").
-4. **Dependency Graph:** Core internal/external dependencies.
+1. **Structural Map:** Symbols and locations.
+2. **Layer Hierarchy:** Definition of Up vs. Down for directional rules.
+3. **Convention Gap Report:** Local vs. Elite differences.
+4. **Dependency Graph:** Internal/External dependencies.
 
 ## Strict Mandates
-- **Local Priority:** ALWAYS prioritize local conventions for immediate implementation.
-- **Proactive Advice:** Document "Gaps" to allow other skills to provide optional recommendations to the user.
-- **NO Git Commands:** Derive context purely from the filesystem.
+- **Local Priority:** Always prioritize local conventions.
+- **NO Git Commands:** Purely filesystem-based context.
+- **Minimize Turns:** Use parallel and rich searches.
 

@@ -7,33 +7,31 @@ description: Master System Architect specializing in DDD, SOLID, and Functional 
 ## When to use this skill
 - Designing new systems (Mobile, Web, or Backend).
 - Refactoring complex logic using **SOLID** and **DDD**.
-- Enforcing architectural consistency across `@flutter-expert`, `@android-kotlin-pro`, and `@ios-swift-architect`.
+- Enforcing architectural consistency across specialized agents.
 
 ## Core Engineering Mandates
 
-### 1. Domain-Driven Design (DDD) & Functional Modeling
+### 1. Directional Dependency Rule (Top-Down & Horizontal)
+- **Dependency Flow:** Imports must only move **Downward** (High-level to Low-level) or **Horizontally** (same level modules).
+    - **Valid:** `Presentation -> Application -> Domain`
+    - **Valid:** `Data -> Domain`
+    - **Invalid:** `Domain -> Presentation` or `Application -> Data` (Upward leakage).
+- **Enforcement Protocol:** If an upward import is detected, the agent MUST notify the user. **Automatic fixes are forbidden** for this specific violation to prevent breaking intended legacy hacks.
+- **User Choice:** If the user acknowledges the violation but chooses not to fix it, the agent will stop flagging that specific instance.
+
+### 2. Domain-Driven Design (DDD) & Functional Modeling
 - **Ubiquitous Language:** Class and function names MUST match business terminology.
-- **Functional Domain Modeling:** Use **Result/Either** types for error handling instead of exceptions. Treat the domain as a series of pure transformations.
-- **Aggregates & Value Objects:** Business logic belongs inside Entities and Aggregates. Use Value Objects for type-safe properties (e.g., `EmailAddress` instead of `String`).
+- **Functional Domain Modeling:** Use **Result/Either** types for error handling instead of exceptions.
+- **Aggregates & Value Objects:** Business logic belongs inside Entities and Aggregates.
 
-### 2. The Clean Architecture Triad
+### 3. The Clean Architecture Triad
 - **Domain Layer (The Core):** Pure logic. ZERO dependencies on UI, frameworks, or DB.
-- **Application Layer (Use Cases):** Defines the "What". Orchestrates domain entities.
-- **Infrastructure Layer (Adapters):** Defines the "How". Implements repository interfaces.
-
-### 3. S.O.L.I.D. & Industrial Patterns
-- **Dependency Inversion:** Depend on abstractions, not implementations. Use DI containers properly.
-- **Interface Segregation:** Small, specific interfaces are better than "God" interfaces.
-- **CQRS:** Consider separating Read (Query) and Write (Command) models for complex domains.
-
-### 4. Scalability & Resilience
-- **Idempotency:** Ensure operations are safe to retry.
-- **Event-Driven:** Use domain events for side effects to maintain decoupling.
-- **Graceful Degradation:** The system should remain partially functional if non-core services fail.
+- **Application Layer (Use Cases):** Orchestrates domain entities.
+- **Infrastructure Layer (Adapters):** Implements repository interfaces and external SDKs.
 
 ## Implementation Workflow
-1. **Model the Domain:** Define Entities, Value Objects, and Domain Events first.
+1. **Model the Domain:** Define Entities, Value Objects, and Domain Events.
 2. **Define Contracts:** Create Repository and Service interfaces in the Domain layer.
-3. **Implement Use Cases:** Orchestrate the flow in the Application layer.
-4. **Plug in Infrastructure:** Implement DB/API details in the Infrastructure layer.
-5. **Review:** Audit against "Anemic Model" and "Tight Coupling" anti-patterns using `@qa-code-review`.
+3. **Analyze Dependencies:** Use `@project-analyzer` to ensure the planned import graph follows the Top-Down rule.
+4. **Implement Layers:** Orchestrate flow in Application, then UI/Data.
+5. **Architectural Audit:** Mandatory call to `@qa-code-review` to check for Directional Dependency violations.
