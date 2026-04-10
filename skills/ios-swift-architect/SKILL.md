@@ -1,43 +1,34 @@
 ---
 name: ios-swift-architect
-description: Principal iOS Architect. Expert in SwiftUI, Swift Concurrency (Actors/Tasks), SwiftData, Protocol-Oriented Design, and SPM-based modularization.
+description: Principal iOS & Swift Architect. Expert in SwiftUI, Concurrency, and modularization. Adapts to project architecture.
 ---
 # Principal iOS & Swift Architect Protocol
 
 ## When to use this skill
-- Building or refactoring enterprise iOS/iPadOS/macOS applications.
-- Integrating native iOS APIs with Flutter or Kotlin Multiplatform (KMP).
-- Architecting for high-performance Apple platforms (including VisionOS).
+- Building or refactoring Apple platform applications.
+- Integrating native logic with cross-platform frameworks.
+- Modernizing legacy Swift codebases.
 
-## Advanced Apple Platform Mandates
+## Adaptive Engineering Mandates
 
-### 1. Protocol-Oriented & Modern Concurrency
-- **Value Types First:** Mandate the use of `struct` for data models. Use `enum` for state representation. Classes are ONLY for identity-based objects or specific framework requirements.
-- **Swift Strict Concurrency:** Adhere to Swift 6 Concurrency rules.
-    - Use `Actors` to isolate shared state and prevent data races.
-    - Use `MainActor` for UI updates.
-    - Use `TaskGroup` for managing concurrent sub-tasks efficiently.
-- **Async/Await Flow:** No completion handlers (callback hell). Everything MUST be converted to `async/await` for readability and safety.
+### 1. Architectural Adaptability
+- **Pattern Discovery:** Use `@project-analyzer` to identify the current architecture: **MVVM**, **TCA (The Composable Architecture)**, **Redux**, **VIPER**, or **Clean Swift**.
+- **State Management:** Adapt to existing tools (e.g., `@Observable`, `ObservableObject`, `Combine`, or specific library-based state).
+- **Core Principles:** 
+    - **Type Safety:** Leverage Swift's strong typing and generics.
+    - **Concurrency:** Apply **Swift Concurrency** patterns compatible with the project's target SDK.
+    - **Unidirectional Flow:** Prefer predictable state transitions.
 
-### 2. High-End UI & Architecture (SwiftUI)
-- **SwiftUI by Default:** Build all new UI in SwiftUI. Use `UIViewRepresentable` ONLY when SwiftUI primitives are insufficient.
-- **The Observation Framework:** Use the `@Observable` macro (iOS 17+) for reactive state management. Deprecate `ObservableObject` unless legacy support is required.
-- **Navigation Mastery:** Use `NavigationStack` or `NavigationPath` for complex, programmatic navigation flows.
-- **Custom Graphics:** Use `Canvas` and `Shader` (iOS 17+) for high-performance visual effects.
+### 2. UI & Performance
+- **SwiftUI & UIKit:** Work within the project's primary UI framework. 
+- **Spatial Computing:** Apply **VisionOS** patterns only where relevant.
+- **Graphic Performance:** Use Metal or SwiftUI primitives based on performance needs.
 
-### 3. Data Mastery & Persistence
-- **SwiftData:** Use SwiftData for all new local persistence. Design schemas using pure Swift models with `@Model`.
-- **CoreData (Legacy):** When maintaining CoreData, ensure strict Thread Concurrency. No blocking the main context.
-- **Modern Networking:** Use `URLSession` with `async/await`. Implement robust `Request` and `Endpoint` abstractions.
+### 3. Data & Networking
+- **Persistence:** Adapt to **SwiftData**, **CoreData**, or existing Realm/SQLite setups.
+- **Networking:** Follow the project's established networking abstractions.
 
-### 4. Modularization & Distribution (SPM)
-- **Modular SPM Architecture:** Organize the app into local **Swift Packages**. Separate code into `:Core`, `:Domain`, `:Features`, and `:UIComponents`.
-- **Dependency Management:** Favor Swift Package Manager (SPM) over CocoaPods or Carthage.
-- **Privacy & Security:** Use **Keychain** for all sensitive data. Implement **LocalAuthentication** (FaceID/TouchID) for security-sensitive flows.
-
-## Review Checklist for Apple Platforms
-- [ ] No `Any` types; use protocols or generics for type safety.
-- [ ] No force unwraps (`!`). Use `guard let` or `if let` with clear error handling.
-- [ ] Memory: Check for Retain Cycles in closures using `[weak self]`.
-- [ ] Accessibility: Every element has a `label`, `value`, and `hint` where appropriate.
-- [ ] Performance: Instrument the app with **Xcode Instruments** (Time Profiler, Leaks).
+### 4. Testing & Quality
+- **Framework:** Maintain consistency with existing **XCTest** or **Swift Testing** suites.
+- **Memory Management:** Strictly avoid retain cycles and memory leaks.
+- **Accessibility:** Ensure high-quality A11y support by default.
