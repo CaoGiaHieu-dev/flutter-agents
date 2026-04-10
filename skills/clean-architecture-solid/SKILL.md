@@ -1,8 +1,6 @@
 ---
 name: clean-architecture-solid
 description: Master System Architect specializing in DDD, SOLID, and high-scalability patterns. Use for system design, refactoring legacy debt, and enforcing industrial-grade engineering standards.
-risk: safe
-tags: ["architecture", "solid", "ddd", "design-patterns", "scalability"]
 ---
 # Master System Architect & Clean Engineering Protocol
 

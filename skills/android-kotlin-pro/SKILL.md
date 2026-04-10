@@ -1,26 +1,40 @@
-﻿---
-name: android-kotlin-pro
-description: Chuyên gia phát triển Android Kotlin bản địa. Xử lý Jetpack Compose, Hilt DI, Coroutines và dọn dẹp nợ kỹ thuật (technical debt).
-risk: safe
-tags: ["android", "kotlin", "compose", "hilt"]
 ---
-# Android & Kotlin Expert Protocol
+name: android-kotlin-pro
+description: Staff Android Engineer. Expert in Jetpack Compose, Hilt DI, Coroutines/Flow, Kotlin Multiplatform (KMP), and modularized architectures.
+---
+# Staff Android & Kotlin Engineering Protocol
 
 ## When to use this skill
-- Bootstrapping or refactoring native Android modules.
-- Migrating legacy Java code to Kotlin.
-- Fixing build system issues or upgrading AGP/Gradle.
+- Bootstrapping or refactoring enterprise-scale Android applications.
+- Integrating Kotlin Multiplatform (KMP) logic into shared modules.
+- Modernizing legacy codebases with Jetpack Compose and Coroutines.
 
-## How to use it (Strict Execution Rules)
+## Advanced Android Mandates
 
-### 1. Build System & Dependency Injection
-- **Kotlin DSL:** ALWAYS use Kotlin DSL (`build.gradle.kts`) and Version Catalogs (`libs.versions.toml`) for dependency management. No Groovy allowed.
-- **DI Framework:** Use Hilt for Dependency Injection. Organize modules explicitly in a `di/` directory.
+### 1. Modern Architecture & State
+- **MVI (Model-View-Intent):** Prefer MVI for predictable state management in complex screens. Use `StateFlow` to emit immutable states and `SharedFlow` for one-time events (SideEffects).
+- **Dependency Injection (Hilt):** Use Hilt for all DI. Organize modules strictly in a `di/` directory. Use `@AssistedInject` for dynamic ViewModel parameters.
+- **Modularization:** Architect for scalability using **Feature Modules**. Separate code into `:core`, `:data`, and `:feature` modules to reduce build times and enforce boundaries.
 
-### 2. Concurrency & Memory
-- **No Legacy Threads:** NEVER use `Thread`, `Handler`, or `AsyncTask`. They cause memory leaks and are obsolete.
-- **Coroutines & Flow:** Use Kotlin Coroutines for asynchronous work. Expose data streams from Repositories/ViewModels using `StateFlow` or `SharedFlow`.
+### 2. High-Performance Jetpack Compose
+- **Stability & Performance:** Use `@Stable` and `@Immutable` annotations properly. Profile recompositions using the Layout Inspector.
+- **Slot API Pattern:** Design reusable components using the Slot API for maximum flexibility.
+- **Custom Graphics:** Use `Canvas` and `DrawScope` for high-performance custom UI components.
+- **No Side-Effects in Composable:** Ensure all side effects are handled using `LaunchedEffect`, `SideEffect`, or `DisposableEffect`.
 
-### 3. UI & Architecture
-- **100% Jetpack Compose:** Do not use XML layouts or ViewBinding unless strictly required to maintain a legacy module. Build UI entirely with `@Composable` functions following Material Design 3.
-- **Clean Data Layer:** Use Room for local SQLite databases and Retrofit/Ktor for network calls. Do not access SQLite directly.
+### 3. Concurrency & Data Mastery
+- **Structured Concurrency:** Always use `viewModelScope` or `lifecycleScope`. Never leak coroutines.
+- **KMP (Kotlin Multiplatform):** Design data layers and business logic in shared modules (`commonMain`) to maximize reuse across Android and iOS.
+- **Modern Storage:** Use **DataStore** instead of SharedPreferences. Use **Room** with Flow for reactive database operations.
+- **Security:** Use **EncryptedSharedPreferences** for sensitive tokens. Implement **BiometricPrompt** for secure authentication.
+
+### 4. Build System & Gradle
+- **Kotlin DSL & Version Catalogs:** Mandatory use of `build.gradle.kts` and `libs.versions.toml`. No Groovy allowed.
+- **R8/Proguard Mastery:** Maintain strict rules for code shrinking and obfuscation. Audit the `mapping.txt` for security.
+
+## Review Checklist for Android
+- [ ] No `Thread.sleep()` or Blocking I/O on the Main Dispatcher.
+- [ ] UI states are represented by a single `sealed class` or `data class`.
+- [ ] All API calls use a `Repository` pattern with a fallback/retry mechanism.
+- [ ] Accessibility: Every UI element has a proper `contentDescription`.
+- [ ] Memory: No memory leaks (monitored via LeakCanary in debug builds).

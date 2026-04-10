@@ -1,8 +1,6 @@
 ---
 name: flutter-expert
 description: Elite Flutter & Dart 3 Architect. Expert in rendering optimization, advanced state management (BLoC/Riverpod), type-safe native channels (Pigeon), and high-performance interop (Dart FFI).
-risk: safe
-tags: ["flutter", "dart", "mobile", "ffi", "bloc", "performance"]
 ---
 # Elite Flutter & Dart 3 Architect Protocol
 

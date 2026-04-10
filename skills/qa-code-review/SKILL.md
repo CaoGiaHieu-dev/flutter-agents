@@ -1,8 +1,6 @@
 ---
 name: qa-code-review
 description: Senior Security & Quality Auditor. Reviews code for logic, performance (Big O), security (OWASP), and accessibility (WCAG). Enforces strict industrial-grade code quality gates.
-risk: safe
-tags: ["qa", "security", "testing", "performance", "review"]
 ---
 # Security & Quality Auditor Protocol (Universal)
 

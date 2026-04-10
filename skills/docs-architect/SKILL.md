@@ -1,43 +1,49 @@
-﻿---
-name: docs-architect
-description: Expert technical writer and documentation architect. Enforces strict comment standards (DartDoc, KDoc, Swift Markdown, Google C++, Python Docstrings) to generate production-ready API documentation.
-risk: safe
-tags: ["documentation", "comments", "clean-code", "dartdoc", "kdoc"]
 ---
-# Code Documentation Expert Protocol
+name: docs-architect
+description: Principal Technical Writer & Documentation Architect. Enforces industrial-grade API documentation, ADRs, and visual architecture mapping (Mermaid).
+---
+# Principal Documentation & Knowledge Architect Protocol
 
 ## When to use this skill
-- When requested to document a class, function, or module.
-- During code refactoring to improve maintainability and readability.
-- When preparing an API or package for public release.
+- Documenting new modules, APIs, or architectural decisions.
+- Standardizing project READMEs, Changelogs, and Roadmap files.
+- Visualizing complex system flows using Mermaid or C4 models.
 
-## General Philosophy (Strict Rules)
-1. **Explain WHY, not WHAT:** Code tells you *how*, comments should tell you *why*. Never write redundant comments that just repeat the code syntax.
-2. **Public APIs MUST be documented:** Any exported class, function, or variable must have a proper doc comment.
+## General Documentation Philosophy
+1. **The "Why" Rule:** Code explains the *How*; documentation explains the *Why*. Never repeat the code in comments.
+2. **Context First:** Every major file or class MUST have a high-level overview of its purpose and its place in the system.
+3. **Actionable Docs:** Documentation should lead to action (how to use, how to test, how to deploy).
 
-## Language-Specific Standards
+## Specialized Documentation Standards
 
-### 1. Flutter / Dart 3 (DartDoc)
-- **Syntax:** ALWAYS use /// for documentation comments, never // or /* */.
-- **References:** Enclose in-scope identifiers (variable names, class names, methods) inside square brackets like [variableName] or [Future.value] to create clickable links in generated docs.
-- **Structure:** The first line must be a concise, one-sentence summary. Leave a blank /// line before writing detailed descriptions.
+### 1. Architecture Decision Records (ADR)
+- **Mandate:** For every significant architectural choice, create an ADR file.
+- **Structure:** Context (Problem), Alternatives Considered, The Decision, and Consequences (Pros/Cons).
+- **Location:** Store ADRs in a dedicated `docs/adr/` directory.
 
-### 2. iOS / Swift 6 (QuickHelp Markdown)
-- **Syntax:** Documentation comments in Swift use Markdown-flavored markup syntax. Use /// above definitions.
-- **Extensions:** You MUST use the Apple CommonMark extensions for functions:
-  - - Parameters: followed by - name: description for arguments.
-  - - Returns: to document the output.
-  - - Throws: to describe what errors might be thrown and under what conditions.
+### 2. Modern API Documentation (OpenAPI/AsyncAPI)
+- **REST APIs:** Use OpenAPI (Swagger) specifications. Document all response codes and security schemes.
+- **Messaging APIs:** Use AsyncAPI for documenting events, brokers, and topics (RabbitMQ, Kafka).
+- **Protobuf/gRPC:** Use `protoc-gen-doc` for automated gRPC documentation.
 
-### 3. Android / Kotlin (KDoc)
-- **Syntax:** Use traditional block comments starting with /** and ending with */.
-- **Tags:** Use standard KDoc tags such as @param for arguments, @return for the return type, and @throws for exceptions.
+### 3. Visual Mapping (Mermaid & C4)
+- **Sequence Diagrams:** Use Mermaid syntax inside Markdown to visualize complex request-response flows.
+- **System Diagrams:** Use the C4 model (Context, Container, Component, Code) to describe architecture at different zoom levels.
+- **State Machines:** Document all state transitions for complex UI or backend logic.
 
-### 4. C++ (Google C++ Style Guide)
-- **Standard:** Follow the Google C++ Style Guide strictly.
-- **File/Class Comments:** Every file and class should have a block comment describing its purpose and usage.
-- **Function Comments:** Describe the inputs, outputs, and side effects. Emphasize thread-safety, memory ownership (who is responsible for deleting pointers), and performance caveats.
+### 4. Code-Level Standards (Language-Specific)
+- **Flutter/Dart (DartDoc):** Use `///` with `[references]` and `{@template}` for reusable doc snippets.
+- **Swift (DocC):** Use QuickHelp Markdown with `- Parameters:`, `- Returns:`, and `- Throws:`.
+- **Android/Kotlin (KDoc):** Use `/** ... */` with `@param`, `@return`, and `@sample`.
+- **Python (Google-style):** Use triple-double quotes `""" ... """` with `Args:`, `Returns:`, and `Raises:`.
+- **C++ (Doxygen):** Follow the Google C++ Style Guide with `@brief`, `@tparam`, and thread-safety warnings.
 
-### 5. Python
-- **Syntax:** Use PEP 257 Google-style Docstrings (triple double-quotes """... """).
-- **Sections:** Include Args:, Returns:, and Raises: sections clearly formatted for automated parsers like Sphinx.
+### 5. Project Metadata (README & Changelog)
+- **README:** Must include "Quick Start," "Project Structure," "Architectural Overview," and "Contribution Guide."
+- **Changelog:** Follow the **Keep a Changelog** standard (Added, Changed, Deprecated, Removed, Fixed, Security). Avoid generic "Updated" messages.
+
+## Documentation Quality Gate
+- [ ] No "TODO" or "FIXME" comments without an associated issue ID or date.
+- [ ] No dead documentation (docs that describe old, removed features).
+- [ ] All diagrams are rendered and verified for accuracy.
+- [ ] Public APIs are 100% documented with examples.
