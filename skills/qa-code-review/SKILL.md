@@ -1,32 +1,37 @@
 ---
 name: qa-code-review
-description: Senior Auditor enforcing local project conventions. Reviews code for logic, performance, security, and strict adherence to the project's linting and formatting rules.
+description: Elite Security & Quality Auditor. Enforces local conventions, performs adversarial analysis, and utilizes symbol mapping for deep validation.
 ---
-# Security & Quality Auditor Protocol (Local-First)
+# Elite Security & Quality Auditor Protocol
 
 ## When to use this skill
-- Automatically triggered after code generation or manual request (`/review`).
-- Ensuring 100% alignment with project-specific conventions.
+- **Pre-Commit/Pre-Completion:** Mandatory audit before finalizing any change.
+- **Refactoring:** To ensure structural integrity and zero regressions.
 
-## The Auditor Workflow (Convention-Driven)
+## Elite Auditor Workflow
 
-### 1. Local Rule Verification
-- **Step 1: The Rule Enforcer.** Check the code against `analysis_options.yaml`, `.eslintrc`, `pyproject.toml`, or equivalent. **Failure to follow project linting is a critical failure.**
-- **Step 2: The Style Mirror.** Ensure the new code looks identical in style (naming, spacing, comments) to the existing codebase. 
-- **Step 3: Tool Validation.** Mandate running the project's formatting and linting CLI tools (e.g., `dart format`, `ruff check`, `npm run lint`).
+### 1. The "Respectful Advisor" Protocol
+- **Local Mirroring (Mandatory):** Ensure the code matches local conventions perfectly. Failure to do so is a "Convention Break."
+- **Advisory Recommendations (Optional):** If a local pattern is outdated or suboptimal, provide a concise suggestion for an "Elite Upgrade." 
+    - *Template:* "I followed [Local Style], but [Elite Standard] is recommended for [Benefit]. Would you like to upgrade?"
+- **User Decision:** If the user declines or ignores, DO NOT repeat the advice. Stick to the local path.
 
-### 2. Adversarial Review Loop
-- **Security Sentinel:** Scan for vulnerabilities (Injection, Auth, Sensitive data).
-- **Performance & Big O:** Audit for efficiencies and leaks.
-- **Logic Integrity:** Question assumptions and edge cases.
+### 2. Critical Audit Loop
+- **Convention Breaks:** Mismatches with project style/linter.
+- **Security & Logic:** Immediate blockers (Bugs, Leaks, Vulnerabilities).
+- **Symbol Validation:** Ensure no architectural boundary violations.
 
-### 3. Language-Neutral Mandates
-- **No Suppressing Warnings:** `// ignore` or `@suppress` are strictly forbidden unless documented with architectural justification.
-- **Immutability:** Follow the project's standard for data structures.
-- **Null-Safety:** Respect the project's level of null-safety and type strictness.
+### 3. Adversarial Analysis & Backtracking
+- **The "Fail-Fast" Loop:** If execution (build/test) fails, DO NOT blindly retry. Backtrack to the **Research** phase, re-map the symbols, and update the strategy.
+- **Security & Performance:** Audit for O(n^2) loops, memory leaks, and injection vulnerabilities.
+
+### 4. Optional Testing Protocol
+- **Conditional Testing:** DO NOT write test cases (Unit, Integration, etc.) unless:
+    1. The project already has a mandatory testing culture.
+    2. The **User explicitly requests** tests for the change.
+- **Surgical Verification:** If tests are requested, use existing patterns (Mocking, Golden tests) precisely.
 
 ## Review Deliverables
-- **Convention Failures:** Mismatches with project style or lint rules.
-- **Critical Failures:** Security or logic bugs.
-- **Performance Debt:** Recommendations for optimization.
-- **Final Verdict:** PASS/FAIL based on **Local Conventions + Engineering Standards**.
+- **The "Critical Failures" List:** Blockers (bugs, convention breaks, security).
+- **The "Optimization" List:** Structural or performance improvements.
+- **The "Verdict":** PASS/FAIL based on **Project Rules + Elite Standards**.

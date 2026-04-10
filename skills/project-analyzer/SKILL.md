@@ -1,40 +1,37 @@
 ---
 name: project-analyzer
-description: Multi-dimensional project context analysis focusing on local conventions. Maps architecture, tech stack, and strict adherence to project-specific linting and formatting rules.
+description: Elite Project Context & Structural Architect. Maps code symbols, detects conventions, and optimizes context usage through turn compression. No Git allowed.
 ---
-# Project Context & Strategy Analyzer Protocol
+# Elite Project Context & Structural Architect Protocol
 
 ## When to use this skill
-- **Initialization:** When first entering a project or starting a new session.
-- **Context Sync:** When a task feels ambiguous or potentially conflicts with existing patterns.
-- **Convention Audit:** To identify the project's specific "Rules of Engagement."
+- **Initialization:** Deep dive into a new or complex codebase.
+- **Context Sync:** Before major changes to ensure structural integrity.
+- **Strategic Mapping:** To identify "what is where" without reading every file.
 
-## Convention-First Analysis Workflow
+## Elite Analysis Workflow (No Git)
 
-### 1. Rule & Style Discovery (Highest Priority)
-- **Linting & Formatting:** Immediately read `analysis_options.yaml`, `.editorconfig`, `pyproject.toml`, `.eslintrc`, or equivalent. These files define the absolute boundaries for code style.
-- **Local Style Guides:** Search for `CONTRIBUTING.md`, `STYLE_GUIDE.md`, or README sections that define variable naming, directory structure, or documentation standards.
-- **Project Identity:** Understand that **Local Conventions > General Best Practices**. If the project uses a specific pattern (even if "old"), follow it to maintain consistency.
+### 1. Structural Symbol Mapping
+- **Symbol Discovery:** Use `grep_search` with regex to map key symbols (Classes, Interfaces, Main Functions, Providers/Blocs) across the project. 
+- **Relationship Tracing:** Identify how core components interact (e.g., "Feature A depends on Service B").
+- **Physical Map:** Use `list_directory` to understand the nesting depth and architectural boundaries.
 
-### 2. Implementation Pattern Detection
-- **Code Archeology:** Read the target file and surrounding files to detect:
-    - Indentation (Spaces vs Tabs).
-    - Trailing commas (Mandatory vs Prohibited).
-    - Commenting style (Doc strings vs inline).
-    - Error handling (Exceptions vs Result types).
-- **Tooling Awareness:** Identify available CLI tools for the project (e.g., `make format`, `npm run lint`, `flutter analyze`) and prepare to use them for validation.
+### 2. Turn Compression & Efficiency
+- **Context-Rich Searching:** When searching, ALWAYS use `context`, `before`, or `after` parameters in `grep_search`. This allows understanding code blocks in a SINGLE turn, bypassing redundant `read_file` calls.
+- **Predictive Discovery:** Anticipate related files. If reading a `Controller`, immediately check for the corresponding `Service` or `Repository` in the same turn.
 
-### 3. Structural Mapping
-- **Architecture Detection:** Map how modules are linked and where different types of logic (UI, Domain, Data) reside.
-- **Dependency Audit:** Identify core libraries to avoid introducing redundant or conflicting dependencies.
+### 3. Convention & Tooling Audit
+- **Rule Enforcement:** Detect `analysis_options.yaml`, `.editorconfig`, `pyproject.toml`, etc. **Local Conventions > General Rules**.
+- **Tooling Map:** Identify the project's native CLI tools (`Makefile`, `npm`, `dart`, `gradle`) for formatting and analysis.
 
-## Deliverables: The "Convention Snapshot"
-1. **Linting Level:** How strict is the project?
-2. **Formatting Tool:** What command should I run to format code?
-3. **Naming Style:** CamelCase, snake_case, or PascalCase for specific entities?
-4. **Architectural Guardrails:** What boundaries must not be crossed?
+## Deliverables: The "Elite Context Snapshot"
+1. **Structural Map:** Key symbols and their locations.
+2. **Convention Rules:** Strictness level and formatting tools.
+3. **Convention Gap Report:** Identify where local rules differ from industry best practices (e.g., "Project uses manual DI, but Elite recommends Hilt/Riverpod for X reason").
+4. **Dependency Graph:** Core internal/external dependencies.
 
-## Strict Prohibition
-- **NO Git Commands:** Derive context only from the current filesystem state.
-- **NO Overriding Conventions:** Do not "fix" existing styles to match personal preferences; follow the established path.
+## Strict Mandates
+- **Local Priority:** ALWAYS prioritize local conventions for immediate implementation.
+- **Proactive Advice:** Document "Gaps" to allow other skills to provide optional recommendations to the user.
+- **NO Git Commands:** Derive context purely from the filesystem.
 
