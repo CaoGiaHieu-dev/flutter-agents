@@ -1,41 +1,36 @@
 ---
 name: python-fastapi-backend
 description: Elite Python & Backend Architect. Expert in FastAPI, 
-             Pydantic V2, Ruff, and Agent-ready API design.
+             Python 3.13 Free-Threading, and Agent-ready API design.
 ---
-# 🐍 Elite Python Backend & Agentic Protocol (v5.0)
+# 🐍 Elite Python Backend & Agentic Protocol (Next-Gen v7.0)
 
 This protocol ensures high-performance, asynchronous, and AI-ready backend 
-systems using the most modern Python standards.
+systems using **Python 3.13.1+** standards.
 
 ---
 
-## 🏗️ PHASE 1: MODERN PYTHON & FASTAPI (v0.100+)
-- **Pydantic V2 Strict:** Use Pydantic V2's strict validation, `Annotated` 
-  types, and `model_validate` patterns. (Avoid V1 legacy).
-- **FastAPI Core:** Use `Depends()` for all service injections. Use 
-  `asyncio.TaskGroup` (Python 3.11+) for concurrent I/O operations.
-- **Type-Safety:** Enforce 100% type hinting. Use `mypy --strict` level 
-  for core domain logic.
+## 🏗️ 1. MODERN PYTHON & FASTAPI
+- **Pydantic V2 Strict:** Use V2 syntax, `Annotated` types, and 
+  `model_validate`. 
+- **Type-Safety:** Enforce 100% type hinting. Conform to `mypy --strict`.
 
-## 🤖 PHASE 2: AGENT-READY API DESIGN
+## ⚡ 2. PERFORMANCE & PARALLELISM (New)
+- **Free-Threading Optimization (Python 3.13):** For CPU-bound 
+  orchestration (e.g., local RAG or data parsing), utilize the new 
+  **no-GIL** (free-threaded) build to achieve 4x-5x throughput.
+- **JIT Governance:** Enable `PYTHON_JIT=1` only for long-running worker 
+  nodes to minimize memory overhead.
+- **Async I/O:** Use `AsyncSession` with SQLAlchemy 2.0. 
+
+## 🤖 3. AGENT-READY API DESIGN
 - **Self-Documenting Tools:** Design API endpoints with rich OpenAPI 
-  metadata (Descriptions, Examples, Tags). This allows AI agents to 
-  discover and call your tools accurately.
-- **Error Consistency:** Use a standardized error response format. Ensure 
-  every 4xx/5xx response has a clear `code` and `reason` for AI 
-  troubleshooting.
-- **Pagination & Filtering:** Enforce consistent pagination (Limit/Offset) 
-  and filtering patterns across all resources.
+  metadata so other AI agents can consume them.
+- **Predictable Errors:** Standardize 4xx/5xx responses with clear `code`.
 
-## ⚡ PHASE 3: PERSISTENCE & TOOLING
-- **SQLAlchemy 2.0+:** Use the new `Select()` syntax and `AsyncSession`. 
-- **Ruff First:** MANDATORY use of **Ruff** for all linting, formatting, 
-  and import sorting.
-- **Security:** Implement secure OAuth2/JWT flows with OIDC support.
-
-## ✅ PHASE 4: BACKEND QUALITY GATE
-1. **Pytest-Asyncio:** Every endpoint MUST have an async integration test.
-2. **OpenAPI Accuracy:** Verify that the generated Swagger matches the 
-   actual behavior.
-3. **80-Column Rule:** All docs and Python code must follow 80-column wrapping.
+## ✅ 4. BACKEND QUALITY GATE
+1. **Ruff First:** MANDATORY use of **Ruff** for linting and formatting.
+2. **Testing:** Mandatory `pytest-asyncio` coverage for all new endpoints.
+3. **Thread Safety:** When using `python3.13t`, audit all third-party 
+   libraries for thread-safety.
+4. **80-Column Rule:** All docs and Python code must follow 80-column wrapping.

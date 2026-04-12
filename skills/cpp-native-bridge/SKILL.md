@@ -1,39 +1,43 @@
 ---
 name: cpp-native-bridge
 description: High-Performance Native Architect. Expert in Modern C++ (23), 
-             Hardware-Optimized SIMD, and Memory-Safe Zero-Copy Bridging.
+             Hardware-Optimized SIMD, and Binary Size Governance.
 ---
-# 🚀 High-Performance Native & Bridge Architecture Protocol (v5.0)
+# 🚀 High-Performance Native & Bridge Architecture Protocol (Legendary Edition)
 
-This protocol enforces elite, hardware-level optimization and memory safety 
-at the language boundary (Dart/Swift/JVM to C++).
+This protocol enforces hardware-level optimization and extreme resource 
+governance for cross-language (Managed to Native) systems.
 
 ---
 
-## 🏗️ PHASE 1: MODERN C++ & MEMORY INTEGRITY
-- **C++20/23 Mandates:** Use `std::span` for safe views, `std::expected` for 
-  functional error handling, and `consteval` for compile-time validation.
-- **Strict RAII:** Raw `new` and `delete` are FORBIDDEN. Use smart pointers 
-  (`std::unique_ptr`). Prefer stack allocation or custom pool allocators.
-- **Boundary Safety:** Never let an exception escape the bridge. Catch 
-  all at the entry point and translate into the target language's errors.
+## 🏗️ 1. MODERN C++ & BINARY GOVERNANCE (New)
+- **Zero-Waste Compilation:** 
+    - MANDATORY use of `-Os` or `-Oz` for mobile binary size optimization.
+    - Proactively strip symbols from production binaries.
+    - Audit for "Template Bloat" — use `std::span` and type-erasure to 
+      minimize code duplication.
+- **Modern Standards:** Use C++23 `std::expected` for error handling and 
+  `std::print` for structured logging.
 
-## ⚡ PHASE 2: HARDWARE-LEVEL OPTIMIZATION (Elite)
-- **SIMD Intrinsics:** Proactively optimize heavy loops using **NEON (ARM)** 
-  or **AVX2 (Intel)** intrinsics.
-- **Zero-Copy Serialization:** For large data (Images, Audio), use 
-  **FlatBuffers** or raw pointers with shared memory. Never use JSON.
-- **Cache-Line Alignment:** Align hot data structures to 64-byte boundaries 
-  to prevent false sharing and minimize cache misses.
-- **Branchless Logic:** Use lookup tables or bitwise operations in hot paths.
+## ⚡ 2. HARDWARE-LEVEL OPTIMIZATION
+- **SIMD (Elite):** Optimize hot paths with **NEON (ARM)** or **AVX2 
+  (Intel)** intrinsics. Prove gains with Google Benchmark.
+- **Memory Alignment:** Use `alignas(64)` for hot data structures to match 
+  CPU cache lines and prevent false sharing.
+- **Zero-Copy FFI:** Use shared memory buffers or FlatBuffers. JSON 
+  serialization is FORBIDDEN across the bridge for heavy data.
 
-## 🌉 PHASE 3: THE BRIDGE (FFI/JNI)
-- **Dart FFI Excellence:** Use `dart:ffi` with Pointer-based access. Automate 
-  bindings using `ffigen`.
-- **Background Workers:** Heavy C++ computation MUST happen in background 
-  threads (pthreads/std::jthread) to keep the UI thread responsive.
+## 🌉 3. THE BRIDGE & CRASH DIAGNOSTICS (New)
+- **Fault Tolerance:** Implement **Signal Handlers** (Android/Linux) or 
+  **Structured Exception Handling** (Windows) at the bridge entry.
+- **Crash Dumps:** Capture mini-dumps or stack traces during native 
+  crashes. Provide automated analysis instructions for LLDB/GDB.
+- **Background Integrity:** Heavy computation MUST use `std::jthread`. 
+  Ensure no C++ thread continues to run after the managed host (Dart/JVM) 
+  has detached.
 
-## ✅ PHASE 4: PERFORMANCE QUALITY GATE
-1. **Asan/Tsan:** Mandatory audit for memory leaks and data races.
-2. **Google Benchmark:** Prove performance gains for every hot path.
+## ✅ 4. PERFORMANCE QUALITY GATE
+1. **Asan/Tsan:** Mandatory checks for memory leaks and data races.
+2. **Size Audit:** Verify that the library size does not exceed the project 
+   budget.
 3. **80-Column Rule:** All docs and C++ code must follow 80-column wrapping.

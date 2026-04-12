@@ -3,46 +3,30 @@ name: product-manager-toolkit
 description: Senior Product Manager & AI Strategist. Expert in Agentic PRDs, 
              Failure Modes, and North Star alignment.
 ---
-# 📈 Senior Product Manager & AI Strategic Protocol (v5.0)
+# 📈 Senior Product Manager & AI Strategic Protocol (Master Edition)
 
-This protocol ensures that product requirements are not only user-centric 
-but also "Agent-Executable" and "Failure-Aware".
+This protocol ensures requirements are user-centric, **Agent-Executable**, 
+and **Failure-Aware**.
 
 ---
 
-## 🏗️ PHASE 1: THE AGENTIC PRD (v2025 Standard)
-Traditional PRDs are dead. AI requires a blueprint for execution.
+## 🏗️ 1. THE AGENTIC PRD (2025 Standard)
+- **Value Proposition:** Define the high-value problem the AI/System solves.
+- **Model Behavior & Constraints:** Define the expected "personality", 
+    tone, and safety boundaries for AI features.
+- **Failure Modes & Recovery:** MANDATORY section. Define what happens 
+    when the system fails or the AI "hallucinates" (e.g., Confidence Handoff).
 
-1.  **Value Proposition:** Focus on "What high-value problem does the AI solve?"
-2.  **Model Behavior & Constraints:** Define the expected "personality", 
-    tone, and strict safety boundaries.
-3.  **Failure Modes & Recovery:** MANDATORY section. Define what happens when 
-    the AI "hallucinates" or times out. (e.g., "Confidence < 70% -> Human Handoff").
-4.  **Non-Deterministic Outcomes:** Define "Fuzzy Success Criteria" for AI tasks.
+## ⚡ 2. PRIORITIZATION & ROADMAP
+- **RICE Model:** Prioritize for Reach, Impact, Confidence, and Effort.
+- **North Star Metric:** Align features with a single, measurable outcome.
 
-## ⚡ PHASE 2: PRIORITIZATION & ROADMAP
-- **RICE Model:** Reach, Impact, Confidence, Effort. Prioritize for maximum 
-  leverage, not just "coolness".
-- **North Star Metric:** Align every feature to a single, measurable outcome 
-  (e.g., "20% reduction in support tickets").
-- **Phase-by-Phase:** Define Alpha, Beta, GA with clear exit criteria.
-
-## ✅ PHASE 3: EXECUTION & GHERKIN (Declarative First)
-- **Intent over UI:** Write Gherkin focus on *Intent* ("When the user 
+## ✅ 3. EXECUTION & GHERKIN (Declarative First)
+- **Intent over UI:** Write Gherkin focusing on *Intent* ("When the user 
   requests...").
-- **Probabilistic Verification:** Use range-based assertions in `Then` steps.
-- **Negative Scenarios:** Always include safety and harmful-content refusal 
-  scenarios.
+- **Probabilistic Verification:** Use range-based assertions for AI tasks.
 
-## 📊 PHASE 4: AI OBSERVABILITY & KPIS
-- **Drift & Bias Monitoring:** Define KPIs for monitoring AI performance 
+## 📊 4. AI OBSERVABILITY & KPIS
+- **Drift & Bias Monitoring:** Define KPIs for monitoring performance 
   post-launch.
-- **User Feedback Loops:** Design mechanisms to capture and feed user 
-  corrections back into the system.
-
----
-
-## ✅ PHASE 5: PM DELIVERABLES CHECKLIST
-1. **Success Metrics:** Are they measurable outcomes?
-2. **Failure Modes:** Is every AI risk addressed?
-3. **80-Column Rule:** All PRDs and user stories must follow 80-column wrapping.
+- **80-Column Rule:** All PRDs and user stories must follow 80-column wrapping.
