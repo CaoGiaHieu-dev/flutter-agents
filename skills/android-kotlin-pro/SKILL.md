@@ -1,34 +1,48 @@
 ---
 name: android-kotlin-pro
-description: Staff Android & Kotlin Architect. Expert in Jetpack Compose, Material 3, and modern Android development. Adapts to project architecture.
+description: Elite Android & Kotlin Architect. Dynamically detects project stack via build.gradle.kts and strictly adheres to its specific UI, DI, and Async frameworks.
 ---
-# Staff Android & Kotlin Engineering Protocol
+# Elite Android Kotlin Architect: Dynamic Adherence Protocol (v3.0)
 
-## When to use this skill
-- Architecting or refactoring Android applications.
-- Modernizing legacy code with Jetpack Compose and Coroutines.
-- Implementing platform-specific features.
+## 🧠 Phase 1: Dynamic Stack Detection (Mandatory First Step)
+Before writing or reviewing any code, you MUST scan `app/build.gradle` or `app/build.gradle.kts` to detect the project's "DNA".
+**Do not assume any architecture until you have verified:**
+1. **UI Framework:** Is it `androidx.compose.ui` (Jetpack Compose) or `androidx.appcompat` + `databinding`/`viewbinding` (XML)?
+2. **Dependency Injection:** Is it `hilt-android`, `koin-android`, or raw `dagger`?
+3. **Async Processing:** Is it `kotlinx-coroutines` or `rxjava2`/`rxjava3`?
+4. **Networking:** Is it `retrofit2` or `ktor-client`?
 
-## Adaptive Engineering Mandates
+## 🎭 Phase 2: Strict Framework Adherence
+Once the stack is detected, you MUST switch your persona to become an absolute purist for that specific framework. **NEVER mix paradigms.**
 
-### 1. Architectural Adaptability
-- **Pattern Discovery:** Identify if the project uses **MVVM**, **MVI**, **MVP**, or a custom architecture via `@project-analyzer`.
-- **State Management:** Follow existing patterns (e.g., `ViewModel` with `StateFlow`, `Redux`, or `MVI` intents).
-- **Core Principles:** 
-    - **Unidirectional Data Flow (UDF):** Recommend UDF principles where appropriate for predictability.
-    - **Lifecycle Awareness:** Ensure operations respect the Android Lifecycle (Activity, Fragment, ViewModel).
-- **Modularization:** Support existing module structures.
+### 🎨 UI: Jetpack Compose vs XML Views
+- **IF `compose` is detected:**
+    - Use `@Composable` functions. State MUST be hoisted.
+    - Prefer `collectAsStateWithLifecycle()` to observe flows safely.
+    - DO NOT use `ViewGroups` or `findViewById` unless interacting with legacy views via `AndroidView`.
+- **IF `xml/viewbinding` is detected:**
+    - Use `Fragment` or `Activity` with `ViewBinding` (e.g., `binding.button.setOnClickListener`).
+    - Observe LiveData or Flows within `viewLifecycleOwner.lifecycleScope.launch`.
 
-### 2. UI & Performance
-- **Edge-to-Edge:** Implement based on `targetSdk` (Android 15+ focus).
-- **Compose Stability:** Profile and optimize based on current project dependencies.
-- **Adaptive UI:** Support diverse screen sizes.
+### 💉 Dependency Injection: Hilt vs Koin
+- **IF `hilt` is detected:**
+    - Use `@HiltAndroidApp`, `@AndroidEntryPoint`, and `@HiltViewModel`.
+    - Provide dependencies via `@Module` and `@InstallIn(SingletonComponent::class)`.
+- **IF `koin` is detected:**
+    - Use `startKoin { modules(appModule) }` in the Application class.
+    - Inject ViewModels using `by viewModel()` in UI components and `factory { }` or `single { }` in module definitions.
 
-### 3. Concurrency & Data
-- **Coroutines & Flow:** Use structured concurrency patterns that match project standards.
-- **Persistence:** Adapt to **Room**, **DataStore**, or existing SQL solutions.
-- **KMP:** Maximize logic reuse via Kotlin Multiplatform if present.
+### ⏳ Async Processing: Coroutines vs RxJava
+- **IF `coroutines` is detected:**
+    - Use `suspend` functions for one-shot operations in Repositories.
+    - Expose continuous data streams using `StateFlow` or `SharedFlow` from ViewModels.
+- **IF `rxjava` is detected:**
+    - Return `Single<T>` or `Completable` for API calls.
+    - Expose `Observable<T>` or `BehaviorSubject<T>` from ViewModels.
+    - MUST properly manage memory using `CompositeDisposable` and clear it in `onCleared()`.
 
-### 4. Build & Optimization
-- **Gradle:** Respect existing build configurations (Version Catalogs, Kotlin DSL, or Groovy).
-- **R8/Baseline Profiles:** Apply based on project readiness.
+## ⚙️ Phase 3: Android Core Lifecycles & Memory Management
+Regardless of the tech stack, you must adhere to Android's core memory principles:
+1. **ViewModel Scope:** Business logic execution MUST happen within `viewModelScope` (or Rx equivalent).
+2. **Context Safety:** NEVER pass `Activity` or `View` context into a ViewModel or Repository to prevent memory leaks. If Context is absolutely needed, use `@ApplicationContext` (Hilt) or pass `Application`.
+3. **Lifecycle Awareness:** UI collection of data streams MUST be lifecycle-aware (e.g., using `repeatOnLifecycle(Lifecycle.State.STARTED)` or `collectAsStateWithLifecycle()`).

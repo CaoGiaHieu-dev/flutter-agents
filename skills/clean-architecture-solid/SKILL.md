@@ -1,37 +1,46 @@
 ---
 name: clean-architecture-solid
-description: Master System Architect specializing in DDD, SOLID, and Functional Domain Modeling. Use for system design and refactoring legacy debt.
+description: Master System Architect specializing in DDD, SOLID, and 
+             Functional Domain Modeling. Enforces Modular Monolith and 
+             Event-Driven patterns.
 ---
-# Master System Architect & Clean Engineering Protocol
+# 🏛️ Master System Architect & Clean Engineering Protocol (v5.0)
 
-## When to use this skill
-- Designing new systems (Mobile, Web, or Backend).
-- Refactoring complex logic using **SOLID** and **DDD**.
-- Enforcing architectural consistency across specialized agents.
+This protocol enforces architectural integrity across all domains. It 
+prioritizes the **Modular Monolith** pattern for scalability and **DDD** 
+for business logic.
 
-## Core Engineering Mandates
+---
 
-### 1. Directional Dependency Rule (Top-Down & Horizontal)
-- **Dependency Flow:** Imports must only move **Downward** (High-level to Low-level) or **Horizontally** (same level modules).
-    - **Valid:** `Presentation -> Application -> Domain`
-    - **Valid:** `Data -> Domain`
-    - **Invalid:** `Domain -> Presentation` or `Application -> Data` (Upward leakage).
-- **Enforcement Protocol:** If an upward import is detected, the agent MUST notify the user. **Automatic fixes are forbidden** for this specific violation to prevent breaking intended legacy hacks.
-- **User Choice:** If the user acknowledges the violation but chooses not to fix it, the agent will stop flagging that specific instance.
+## 🏗️ PHASE 1: MODULAR MONOLITH & LAYER INTEGRITY
+- **Strict Separation:** Divide the project into independent **Modules** or 
+  **Features**. 
+- **Layer Boundary Enforcement:** 
+    1.  **Domain (Core):** Pure business logic. Entities, Value Objects, and 
+        Repository interfaces. (ZERO dependencies on frameworks).
+    2.  **Application (Use Cases):** Orchestrates domain logic for specific 
+        business tasks.
+    3.  **Infrastructure (Adapters):** External dependencies (DB, APIs, SDKs).
+    4.  **Presentation (UI):** High-level framework logic (BLoC/SwiftUI/FastAPI).
 
-### 2. Domain-Driven Design (DDD) & Functional Modeling
-- **Ubiquitous Language:** Class and function names MUST match business terminology.
-- **Functional Domain Modeling:** Use **Result/Either** types for error handling instead of exceptions.
-- **Aggregates & Value Objects:** Business logic belongs inside Entities and Aggregates.
+## ⚡ PHASE 2: EVENT-DRIVEN & FUNCTIONAL DESIGN
+- **Event-Driven Architecture (EDA):** Use Domain Events for cross-module 
+  communication to prevent tight coupling.
+- **Functional Core, Imperative Shell:** Keep the domain logic pure 
+  (Functional) and isolate all side effects to the Infrastructure layer 
+  (Imperative Shell).
+- **The Either Pattern:** Use `Either<Failure, Success>` for all domain-level 
+  operations. Prohibit `throw` for expected failures.
 
-### 3. The Clean Architecture Triad
-- **Domain Layer (The Core):** Pure logic. ZERO dependencies on UI, frameworks, or DB.
-- **Application Layer (Use Cases):** Orchestrates domain entities.
-- **Infrastructure Layer (Adapters):** Implements repository interfaces and external SDKs.
+## 🛠️ PHASE 3: PRAGMATIC GOVERNANCE
+- **Anti-Fragile Shortcuts:** If a strict layer separation adds excessive 
+  boilerplate for a trivial feature, document a **Pragmatic Shortcut** in an ADR.
+- **Stability Index:** Proactively identify "fragile" modules (files that change 
+  too often and have too many dependencies).
 
-## Implementation Workflow
-1. **Model the Domain:** Define Entities, Value Objects, and Domain Events.
-2. **Define Contracts:** Create Repository and Service interfaces in the Domain layer.
-3. **Analyze Dependencies:** Use `@project-analyzer` to ensure the planned import graph follows the Top-Down rule.
-4. **Implement Layers:** Orchestrate flow in Application, then UI/Data.
-5. **Architectural Audit:** Mandatory call to `@qa-code-review` to check for Directional Dependency violations.
+## ✅ PHASE 4: ARCHITECTURAL AUDIT
+1. **Directional Scan:** Run an automated scan for Upward Imports (e.g., 
+   `domain` importing `presentation`). (MANDATORY FAILURE if found).
+2. **Modular Integrity:** Ensure no module imports another's private internals. 
+   Modules must communicate only through public interfaces.
+3. **80-Column Rule:** All docs and diagrams must follow 80-column wrapping.

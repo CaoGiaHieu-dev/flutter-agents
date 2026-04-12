@@ -1,31 +1,41 @@
 ---
 name: python-fastapi-backend
-description: Elite Python & Backend Architect. Expert in FastAPI, SQLALchemy, and high-performance async systems. Adapts to project Python version.
+description: Elite Python & Backend Architect. Expert in FastAPI, 
+             Pydantic V2, Ruff, and Agent-ready API design.
 ---
-# Elite Python Backend & Automation Protocol
+# 🐍 Elite Python Backend & Agentic Protocol (v5.0)
 
-## When to use this skill
-- Architecting scalable APIs and Microservices with FastAPI.
-- Designing high-performance background workers and automation.
-- Improving code quality with modern linting (Ruff/Mypy).
+This protocol ensures high-performance, asynchronous, and AI-ready backend 
+systems using the most modern Python standards.
 
-## Version-Adaptive Engineering Mandates
+---
 
-### 1. Context-Aware Python
-- **Environment Detection:** Detect Python version and library versions (Pydantic, SQLAlchemy) via `@project-analyzer`.
-- **Type-Safety:** Use **Type Hints** extensively. Adapt to `Annotated` (3.9+) or older patterns as needed.
-- **Pydantic:** Support both V1 and V2 syntax depending on project dependencies.
+## 🏗️ PHASE 1: MODERN PYTHON & FASTAPI (v0.100+)
+- **Pydantic V2 Strict:** Use Pydantic V2's strict validation, `Annotated` 
+  types, and `model_validate` patterns. (Avoid V1 legacy).
+- **FastAPI Core:** Use `Depends()` for all service injections. Use 
+  `asyncio.TaskGroup` (Python 3.11+) for concurrent I/O operations.
+- **Type-Safety:** Enforce 100% type hinting. Use `mypy --strict` level 
+  for core domain logic.
 
-### 2. Persistence & Concurrency
-- **SQLAlchemy:** Use **AsyncSession** for async-first applications. Support both 1.4 (Legacy) and 2.0 (Modern) API styles.
-- **Concurrency:** Leverage `asyncio` for I/O bound tasks. Use `asyncio.TaskGroup` if Python 3.11+ is available.
-- **Caching:** Use Redis for distributed state.
+## 🤖 PHASE 2: AGENT-READY API DESIGN
+- **Self-Documenting Tools:** Design API endpoints with rich OpenAPI 
+  metadata (Descriptions, Examples, Tags). This allows AI agents to 
+  discover and call your tools accurately.
+- **Error Consistency:** Use a standardized error response format. Ensure 
+  every 4xx/5xx response has a clear `code` and `reason` for AI 
+  troubleshooting.
+- **Pagination & Filtering:** Enforce consistent pagination (Limit/Offset) 
+  and filtering patterns across all resources.
 
-### 3. Tooling & Security
-- **Ruff:** Use **Ruff** for linting/formatting if possible, otherwise adhere to project's `pyproject.toml` or `flake8` config.
-- **Auth:** Implement secure OAuth2/JWT flows.
-- **Observability:** Integrate OpenTelemetry and structured logging.
+## ⚡ PHASE 3: PERSISTENCE & TOOLING
+- **SQLAlchemy 2.0+:** Use the new `Select()` syntax and `AsyncSession`. 
+- **Ruff First:** MANDATORY use of **Ruff** for all linting, formatting, 
+  and import sorting.
+- **Security:** Implement secure OAuth2/JWT flows with OIDC support.
 
-### 4. Quality Assurance
-- **Testing:** Use `pytest` and `pytest-asyncio`.
-- **Documentation:** Ensure OpenAPI (Swagger) is well-structured.
+## ✅ PHASE 4: BACKEND QUALITY GATE
+1. **Pytest-Asyncio:** Every endpoint MUST have an async integration test.
+2. **OpenAPI Accuracy:** Verify that the generated Swagger matches the 
+   actual behavior.
+3. **80-Column Rule:** All docs and Python code must follow 80-column wrapping.

@@ -1,43 +1,39 @@
 ---
 name: cpp-native-bridge
-description: High-Performance Native Architect. Expert in Modern C++ (20/23), JNI/FFI bridge design, SIMD optimization, and memory-safe system programming.
+description: High-Performance Native Architect. Expert in Modern C++ (23), 
+             Hardware-Optimized SIMD, and Memory-Safe Zero-Copy Bridging.
 ---
-# High-Performance Native & Bridge Architecture Protocol
+# 🚀 High-Performance Native & Bridge Architecture Protocol (v5.0)
 
-## When to use this skill
-- Implementing heavy algorithms (e.g., Computer Vision, Audio Engine, Cryptography).
-- Designing low-latency bridges between high-level languages (Dart, Java, Swift) and C++.
-- Optimizing for hardware-specific instructions (ARM Neon, Intel AVX).
+This protocol enforces elite, hardware-level optimization and memory safety 
+at the language boundary (Dart/Swift/JVM to C++).
 
-## Advanced C++ Mandates
+---
 
-### 1. Modern C++ & Memory Safety
-- **C++20/23 by Default:** Utilize `std::span`, `std::jthread`, `std::ranges`, and Concepts for robust, readable code.
-- **Strict RAII:** Never use raw `new` or `delete`. Mandatory use of `std::unique_ptr` and `std::shared_ptr`. Prefer stack allocation over heap when possible.
-- **Memory Auditing:** Always recommend compiling with **AddressSanitizer (ASan)** and **ThreadSanitizer (TSan)** during development to catch memory leaks and race conditions.
+## 🏗️ PHASE 1: MODERN C++ & MEMORY INTEGRITY
+- **C++20/23 Mandates:** Use `std::span` for safe views, `std::expected` for 
+  functional error handling, and `consteval` for compile-time validation.
+- **Strict RAII:** Raw `new` and `delete` are FORBIDDEN. Use smart pointers 
+  (`std::unique_ptr`). Prefer stack allocation or custom pool allocators.
+- **Boundary Safety:** Never let an exception escape the bridge. Catch 
+  all at the entry point and translate into the target language's errors.
 
-### 2. High-Performance Bridge (JNI & FFI)
-- **Zero-Copy Serialization:** For heavy data (images, streams), use **FlatBuffers** or shared memory buffers instead of JSON or heavy protobuf serialization.
-- **Dart FFI Excellence:**
-    - Use `dart:ffi` with `Pointer` and `Struct` for direct memory access.
-    - Leverage **ffigen** for auto-generated bindings.
-    - Offload heavy C++ work to background native threads to keep the UI thread (Flutter/Android/iOS) responsive.
-- **Android JNI Safety:** 
-    - Use `ScopedLocalRef` to prevent JNI local reference table overflow.
-    - Ensure all JNI calls are wrapped in exception-catching blocks to prevent JVM crashes.
+## ⚡ PHASE 2: HARDWARE-LEVEL OPTIMIZATION (Elite)
+- **SIMD Intrinsics:** Proactively optimize heavy loops using **NEON (ARM)** 
+  or **AVX2 (Intel)** intrinsics.
+- **Zero-Copy Serialization:** For large data (Images, Audio), use 
+  **FlatBuffers** or raw pointers with shared memory. Never use JSON.
+- **Cache-Line Alignment:** Align hot data structures to 64-byte boundaries 
+  to prevent false sharing and minimize cache misses.
+- **Branchless Logic:** Use lookup tables or bitwise operations in hot paths.
 
-### 3. Hardware-Level Optimization
-- **SIMD Intrinsics:** Optimize hot loops using **ARM Neon** or **Intel AVX** intrinsics.
-- **Parallelism:** Use `std::execution::par` (Parallel Algorithms) or `std::async` for multi-core utilization.
-- **Concurrency:** Use `std::atomic` for lock-free programming where performance is critical.
+## 🌉 PHASE 3: THE BRIDGE (FFI/JNI)
+- **Dart FFI Excellence:** Use `dart:ffi` with Pointer-based access. Automate 
+  bindings using `ffigen`.
+- **Background Workers:** Heavy C++ computation MUST happen in background 
+  threads (pthreads/std::jthread) to keep the UI thread responsive.
 
-### 4. Build Systems & Portability
-- **Modern CMake:** Use target-based CMake (`target_include_directories`, `target_link_libraries`). Avoid global variables.
-- **Multi-Platform:** Ensure code is cross-platform compatible (Android, iOS, Windows, Linux, MacOS).
-
-## Performance Review Checklist for C++
-- [ ] No raw pointers without a clear ownership strategy.
-- [ ] All exceptions are caught at the language boundary (NO C++ exceptions in Dart/JVM/Swift).
-- [ ] Hot loops are analyzed for cache-friendliness (Memory Alignment).
-- [ ] Benchmarks are conducted using **Google Benchmark** to prove performance gains.
-- [ ] Binary size is minimized using `-Os` and symbol stripping in production.
+## ✅ PHASE 4: PERFORMANCE QUALITY GATE
+1. **Asan/Tsan:** Mandatory audit for memory leaks and data races.
+2. **Google Benchmark:** Prove performance gains for every hot path.
+3. **80-Column Rule:** All docs and C++ code must follow 80-column wrapping.

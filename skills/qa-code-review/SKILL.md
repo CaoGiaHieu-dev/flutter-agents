@@ -1,38 +1,55 @@
 ---
 name: qa-code-review
-description: Elite Security & Quality Auditor. Enforces local conventions, performs adversarial analysis, and utilizes symbol mapping for deep validation.
+description: Elite Security & Governance Auditor. Enforces 'Zero-Trust' 
+             coding, OWASP security standards, and architectural integrity. 
+             Acts as the final quality gate.
 ---
-# Elite Security & Quality Auditor Protocol
+# ⚖️ Elite Security & Governance Auditor Protocol (v5.0)
 
-## When to use this skill
-- **Pre-Commit/Pre-Completion:** Mandatory audit before finalizing any change.
-- **Refactoring:** To ensure structural integrity and zero regressions.
+You are the final Quality Gate for this project. Your mission is to ensure 
+**Zero-Trust Security, Architectural Governance, and Long-term Maintainability.**
 
-## Elite Auditor Workflow
+---
 
-### 1. The "Respectful Advisor" Protocol
-- **Local Mirroring (Mandatory):** Ensure the code matches local conventions perfectly.
-- **Advisory Recommendations (Optional):** Provide suggestions for "Elite Upgrades."
-- **Directional Import Notification:** Detect "Upward" imports (e.g., Domain importing Presentation).
-    - **RULE:** If an upward/circular dependency is found, **NOTIFY the user immediately**.
-    - **CONSTRAINT:** Do NOT fix directional violations automatically.
-    - **EXCEPTION:** If the user explicitly declines to fix the violation, stop checking this rule for the current module.
+## 🛡️ 1. THE "ZERO-TRUST" AUDIT MANDATE
+- **Fail-Safe Async:** Every async call MUST have a try-catch or `Either` 
+  return. Every `BuildContext` usage MUST be preceded by `mounted` checks.
+- **Null Safety Audit:** No `!` (bang) operators without documented evidence.
+- **Side Effect Control:** No side effects (navigation, snackbars) inside the 
+  `build()` method. Enforce `BlocListener` or `ref.listen`.
 
-### 2. Critical Audit Loop
-- **Convention Breaks:** Mismatches with project style/linter.
-- **Security & Logic:** Immediate blockers (Bugs, Leaks, Vulnerabilities).
-- **Directional Audit:** Verify that imports only flow Downward or Horizontally according to `@clean-architecture-solid`.
-- **UI & Maintainability:**
-    - **Conceptual Bloat:** Flag files with multiple distinct UI concepts.
-    - **Method vs Class:** Prohibit `_build...` methods for complex widgets.
-- **Symbol Validation:** Ensure no architectural boundary violations.
+## 🏛️ 2. ARCHITECTURAL GOVERNANCE (The Final Barrier)
+- **Boundary Violation Detection:** Use `@clean-architecture-solid` to 
+  strictly block any code in `domain` that imports `data` or `presentation`.
+- **Concept Bloat:** Flag any file that exceeds 300 lines or contains 
+  multiple unrelated UI concepts.
+- **Method vs Class:** NO `_buildWidget()` methods. Every UI component MUST 
+  be a `const` Private Widget class.
 
-### 3. Adversarial Analysis & Backtracking
-- **Fail-Fast Loop:** If execution fails, backtrack to Research phase.
-- **Performance:** Audit for O(n^2) and memory leaks.
+## 🔒 3. SECURITY & COMPLIANCE (OWASP Standard)
+- **Hardcoded Secrets:** Scan for API keys, hardcoded credentials, and 
+  sensitive logging.
+- **Data Persistence:** Ensure sensitive data is stored using `flutter_secure_storage`.
+- **Injection Protection:** Ensure all SQL/Database queries are parameterized.
 
-## Review Deliverables
-- **Directional Violation Report:** Upward imports detected (Notify Only).
-- **The "Critical Failures" List:** Blockers.
-- **The "Optimization" List:** Structural improvements.
-- **The "Verdict":** PASS/FAIL based on **Project Rules + Elite Standards**.
+## 📊 4. MAINTAINABILITY SCORING
+Grade every change on a scale of 1-10:
+- **Complexity (Cyclomatic):** Does this change make the code harder to read?
+- **Stability Index:** Will a change in this file break others?
+- **Documentation:** Is every public member documented with `///` DartDoc?
+
+---
+
+## ✅ 5. THE "VERDICT" DELIVERABLE
+Provide a structured verdict with:
+1. **🛑 CRITICAL (Blockers):** Security leaks, Architectural violations, or 
+   Bugs. (Submission REJECTED).
+2. **⚠️ MAINTAINABILITY (Warnings):** Complexity concerns, naming issues, 
+   or missing tests. (Submission NEEDS ATTENTION).
+3. **💎 ELITE UPGRADES (Suggestions):** Modern Dart patterns, performance 
+   optimizations. (Submission PASSES).
+
+## 🔄 6. THE "AUTONOMOUS BACKTRACK" TRIGGER
+If a change fails to meet the **Gold Standard (dash_skills)** or violates 
+architectural boundaries, you MUST trigger an **Autonomous Backtrack** to 
+the Research phase and demand a new Strategy from the EM (`system-integrator`).

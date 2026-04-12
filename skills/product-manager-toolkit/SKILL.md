@@ -1,39 +1,48 @@
 ---
 name: product-manager-toolkit
-description: Senior Product Manager & Strategist. Expert in PRDs, RICE prioritization, Gherkin Acceptance Criteria, A/B testing, and GTM strategy.
+description: Senior Product Manager & AI Strategist. Expert in Agentic PRDs, 
+             Failure Modes, and North Star alignment.
 ---
-# Senior Product Manager & Strategic Architecture Protocol
+# 📈 Senior Product Manager & AI Strategic Protocol (v5.0)
 
-## When to use this skill
-- Formulating Product Requirements Documents (PRDs) and Technical Specs.
-- Prioritizing features using data-driven frameworks (RICE, Kano).
-- Designing Go-To-Market (GTM) strategies and Success Metrics (KPIs/OKRs).
+This protocol ensures that product requirements are not only user-centric 
+but also "Agent-Executable" and "Failure-Aware".
 
-## Strategic Product Mandates
+---
 
-### 1. Requirements & Scoping (Gherkin Syntax)
-- **User Stories:** Write stories using the "As a [user], I want [action], so that [value]" format.
-- **Acceptance Criteria:** Use **Gherkin Syntax** (Given, When, Then) for unambiguous requirements that can be easily converted into automated tests.
-- **Technical PRD:** Bridge the gap between product and engineering by documenting API requirements, performance constraints, and data models in the PRD.
+## 🏗️ PHASE 1: THE AGENTIC PRD (v2025 Standard)
+Traditional PRDs are dead. AI requires a blueprint for execution.
 
-### 2. Prioritization & Roadmap
-- **RICE Model:** Score every feature based on **Reach**, **Impact**, **Confidence**, and **Effort**. Be ruthless in de-prioritizing low-impact/high-effort tasks.
-- **MVP vs MLP:** Define the Minimum Viable Product (for functionality) and the **Minimum Lovable Product** (for user delight and retention).
-- **Phased Rollout:** Design roadmap phases (Alpha, Beta, General Availability) with clear exit criteria for each phase.
+1.  **Value Proposition:** Focus on "What high-value problem does the AI solve?"
+2.  **Model Behavior & Constraints:** Define the expected "personality", 
+    tone, and strict safety boundaries.
+3.  **Failure Modes & Recovery:** MANDATORY section. Define what happens when 
+    the AI "hallucinates" or times out. (e.g., "Confidence < 70% -> Human Handoff").
+4.  **Non-Deterministic Outcomes:** Define "Fuzzy Success Criteria" for AI tasks.
 
-### 3. Data-Driven Decision Making
-- **North Star Metric:** Define the single most important metric that indicates product success.
-- **Funnel & Cohort Analysis:** Design events for tracking user journeys, drop-offs, and long-term retention.
-- **A/B Testing:** Design experiments with clear hypotheses, control groups, and statistical significance requirements.
+## ⚡ PHASE 2: PRIORITIZATION & ROADMAP
+- **RICE Model:** Reach, Impact, Confidence, Effort. Prioritize for maximum 
+  leverage, not just "coolness".
+- **North Star Metric:** Align every feature to a single, measurable outcome 
+  (e.g., "20% reduction in support tickets").
+- **Phase-by-Phase:** Define Alpha, Beta, GA with clear exit criteria.
 
-### 4. GTM & Risk Management
-- **Go-To-Market (GTM):** Define Pricing, Positioning, and Distribution channels.
-- **Risk Assessment:** Proactively identify Technical Risks (scalability), Market Risks (competition), and Operational Risks (legal/compliance).
-- **Feedback Loops:** Implement mechanisms to collect and synthesize user feedback directly into the product lifecycle.
+## ✅ PHASE 3: EXECUTION & GHERKIN (Declarative First)
+- **Intent over UI:** Write Gherkin focus on *Intent* ("When the user 
+  requests...").
+- **Probabilistic Verification:** Use range-based assertions in `Then` steps.
+- **Negative Scenarios:** Always include safety and harmful-content refusal 
+  scenarios.
 
-## PM Deliverables Checklist
-- [ ] PRD includes a "Success Metrics" section with measurable KPIs.
-- [ ] Requirements are broken down into implementable User Stories.
-- [ ] Constraints (Security, Performance, Accessibility) are clearly defined.
-- [ ] Competitive analysis is conducted (TAM/SAM/SOM).
-- [ ] A clear "No-Go" list (what we are NOT building) is included to prevent scope creep.
+## 📊 PHASE 4: AI OBSERVABILITY & KPIS
+- **Drift & Bias Monitoring:** Define KPIs for monitoring AI performance 
+  post-launch.
+- **User Feedback Loops:** Design mechanisms to capture and feed user 
+  corrections back into the system.
+
+---
+
+## ✅ PHASE 5: PM DELIVERABLES CHECKLIST
+1. **Success Metrics:** Are they measurable outcomes?
+2. **Failure Modes:** Is every AI risk addressed?
+3. **80-Column Rule:** All PRDs and user stories must follow 80-column wrapping.
