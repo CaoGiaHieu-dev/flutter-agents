@@ -41,3 +41,11 @@ Before any high-stakes execution (refactors, infrastructure changes):
 ## 🚨 5. CRISIS & FAULT ISOLATION
 In a crash: Isolate the **Fault Boundary** -> Trace to **Domain State**.
 **80-Column Rule:** All reports and instructions wrap at 80 columns.
+
+## 🛡️ 6. LOCAL-FIRST & LEGACY MANDATE (New - Priority)
+- **Local Supremacy:** Local project rules (conventions, formatting, style) 
+  ALWAYS override general "Best Practices".
+- **Legacy Integrity:** Respect and preserve legacy code. NEVER refactor or 
+  improvise on existing code unless explicitly directed.
+- **Inquiry Protocol:** Ask before any non-trivial change. If the user 
+  denies the proposal, DO NOT ask again for the same context.

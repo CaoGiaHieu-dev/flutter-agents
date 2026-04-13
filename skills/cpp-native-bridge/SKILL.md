@@ -37,7 +37,15 @@ governance for cross-language (Managed to Native) systems.
   has detached.
 
 ## ✅ 4. PERFORMANCE QUALITY GATE
-1. **Asan/Tsan:** Mandatory checks for memory leaks and data races.
+1. **Asan/Tsan:** Mandatory some checks for memory leaks and data races.
 2. **Size Audit:** Verify that the library size does not exceed the project 
    budget.
 3. **80-Column Rule:** All docs and C++ code must follow 80-column wrapping.
+
+## 🛡️ LOCAL-FIRST & LEGACY COMPLIANCE
+- **Local Protocol:** Follow local project DNA (conventions/formatting) 
+  strictly. Do not impose C++23 if the project is locked to an older 
+  standard.
+- **Legacy Respect:** Preserve legacy code. No improvisation or refactoring 
+  without a direct user mandate.
+- **One-Time Inquiry:** Ask before changing. If denied, stop immediately.

@@ -36,3 +36,11 @@ Documentation MUST be separated into four distinct quadrants. Never mix them.
 1. **Exhaustivity:** Are all public members documented?
 2. **Verifiability:** Are the steps in the How-to guides reproducible?
 3. **80-Column Rule:** Enforce 80-column wrapping for all Markdown/Doc files.
+
+## 🛡️ LOCAL-FIRST & LEGACY MANDATE
+- **Local Style:** If the project uses a specific documentation style or 
+  language (e.g., Vietnamese), do NOT force English or Diátaxis if it 
+  conflicts with the existing structure.
+- **Legacy Respect:** Preserve existing documentation files and formats. 
+  Do not reorganize the entire docs folder without permission.
+- **One-Time Inquiry:** Ask before changing. If denied, stop.

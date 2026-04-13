@@ -14,6 +14,9 @@ and **Failure-Aware**.
 - **Value Proposition:** Define the high-value problem the AI/System solves.
 - **Model Behavior & Constraints:** Define the expected "personality", 
     tone, and safety boundaries for AI features.
+- **Local Compliance:** PRDs MUST respect local architectural constraints 
+    and legacy code realities. No "greenfield" assumptions for brownfield 
+    projects.
 - **Failure Modes & Recovery:** MANDATORY section. Define what happens 
     when the system fails or the AI "hallucinates" (e.g., Confidence Handoff).
 

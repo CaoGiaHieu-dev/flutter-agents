@@ -67,9 +67,16 @@ practices.
 
 - **Commits**: Each PR should generally correspond to a single squashed commit
   upon merging.
-- **Shared History**: Once a PR is open, avoid force pushing to the branch.
-- **Conflict Resolution**: Prefer merging `main` into the PR branch rather than
+- **Shared History:** Once a PR is open, avoid force pushing to the branch.
+- **Conflict Resolution:** Prefer merging `main` into the PR branch rather than
   rebasing to resolve conflicts. This preserves the review history and comments.
 - **Reviewing**: Add comments from the "Files changed" view to batch them.
 - **Local Inspection**: Use `gh pr checkout <number>` to inspect changes
   locally in your IDE.
+
+## 🛡️ LOCAL-FIRST & LEGACY MANDATE
+- **Protocol Adherence:** Follow the existing versioning and changelog 
+  style of the package strictly.
+- **Legacy Integrity:** Do not refactor core package logic during simple 
+  maintenance tasks (like dependency bumps) without a direct mandate.
+

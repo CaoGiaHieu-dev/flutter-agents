@@ -41,3 +41,10 @@ Scan `build.gradle.kts` to identify the project's "DNA":
 2. **Stability:** Ensure no memory leaks via LeakCanary (if present).
 3. **Testing:** Mandatory `JUnit5` or `Kotest` coverage for all Use Cases.
 4. **80-Column Rule:** All docs and Kotlin code must follow 80-column wrapping.
+
+## 🛡️ LOCAL-FIRST & LEGACY COMPLIANCE
+- **Local Protocol:** Follow local project DNA (conventions/formatting) 
+  strictly. Do not force-migrate XML to Compose or Koin to Hilt.
+- **Legacy Respect:** Preserve legacy code. No improvisation or refactoring 
+  without a direct user mandate.
+- **One-Time Inquiry:** Ask before changing. If denied, stop immediately.

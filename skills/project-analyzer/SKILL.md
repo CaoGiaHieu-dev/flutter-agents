@@ -32,6 +32,8 @@ For every analysis, generate a **Sovereign Handover**:
 - Pop Quiz: [Verified assumptions]
 ```
 
-## ⚡ 4. PERFORMANCE MANDATES
+## ⚡ 4. PERFORMANCE & COMPLIANCE MANDATES
 - **Turn Compression:** `grep_search` with rich context.
+- **Local DNA Detection:** Prioritize identifying local formatting, 
+  naming conventions, and legacy patterns over general standards.
 - **80-Column Rule:** All analysis reports wrap at 80 columns.

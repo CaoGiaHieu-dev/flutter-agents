@@ -45,6 +45,12 @@ without horizontal scrolling.
 Target 80 characters for wrapping text. Exceptions are allowed for long URLs
 or identifiers that cannot be broken.
 
+## 🛡️ LOCAL-FIRST & LEGACY MANDATE
+- **Local Supremacy:** If the project uses 120 chars or different 
+  conventions, DISREGARD the 80-char rule in favor of the project's style.
+- **Legacy Respect:** Do not refactor existing strings or formatting 
+  patterns unless they are part of a new feature implementation.
+
 ## Related Skills
 
 - **[dart-modern-features]**: For idiomatic
