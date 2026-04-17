@@ -1,46 +1,57 @@
-# 🔍 Elite Agent Example: Full Codebase Template Audit
+# 🔍 Elite Agent Example: Full Codebase Audit & Governance (v9.0)
 
-Ví dụ này minh họa cách bộ Agents Elite thực hiện một đợt tổng kiểm tra (Audit) cho một Template Codebase phức tạp (Flutter + FastAPI).
+Ví dụ này minh họa cách bộ Agents thực hiện đợt kiểm tra tổng thể và quản trị dự án, kết hợp giữa kỹ thuật và kinh doanh.
 
 ---
 
 ## 📂 Bối cảnh (The Scenario)
-Bạn có một Template "E-Commerce Start-kit". Bạn muốn biết nó có đủ tốt để scale lên 1 triệu người dùng không và có lỗ hổng bảo mật nào không.
+Một hệ thống E-commerce đang chạy. Bạn muốn Audit để chuẩn bị cho chiến dịch Sale lớn (Black Friday).
 
 ---
 
-## 🛠 Bước 1: Quét bối cảnh (Context Discovery)
-**Agent:** `@project-analyzer` thực hiện **Symbol Mapping**.
-- **Hành động:** 
-    - Quét `pubspec.yaml`, `requirements.txt`.
-    - Lập bản đồ: `AuthService`, `PaymentGateway`, `DatabaseConfig`.
-- **Kết quả:** Phát hiện Flutter dùng **Provider** (style cũ), Python dùng **SQLAlchemy 1.4**.
+## 📊 Bước 1: Business Impact & Prioritization
+**Agent:** `@product-manager-toolkit` (PM/BA) đánh giá.
+
+- **Hành động:** Phân tích `RICE Score` cho các lỗi tồn đọng.
+- **Business Arbitration:** Xác định lỗi "Giỏ hàng bị chậm" có `Impact: High` và `Effort: Medium`. Ưu tiên xử lý trước các lỗi UI nhỏ.
+- **User Feedback Loop:** Đọc log từ Sentry/Firebase để xác định 15% User bị crash khi thanh toán bằng Apple Pay.
 
 ---
 
-## 🧠 Bước 2: Đánh giá Đa chiều (Multi-Agent Analysis)
-**Agent:** `@system-integrator` điều phối các chuyên gia thực hiện Audit (Không sửa code).
+## 🛡️ Bước 2: Hardware-Aware & Security Audit
+**Agent:** `@qa-code-review` thực hiện quét sâu.
 
-1.  **`@clean-architecture-solid` (Kiến trúc):** 
-    - *"Template này đang dùng 'Fat Models' (Model chứa quá nhiều logic). Điểm yếu: Khó bảo trì khi thêm tính năng thanh toán phức tạp."*
-2.  **`@qa-code-review` (Bảo mật):** 
-    - *"CẢNH BÁO: Phát hiện lỗi SQL Injection tiềm tàng trong hàm `search_products`. Dữ liệu người dùng được nối chuỗi trực tiếp vào query."*
-    - *"Rủi ro: Token JWT không có khóa bí mật (Secret Key) được lưu an toàn (đang hardcode)."*
-3.  **`@flutter-expert` (Hiệu năng):**
-    - *"Widget `ProductCard` đang bị redraw không cần thiết. Cần thêm `const` và `RepaintBoundary`."*
+- **Hardware Audit:** Chạy profiling trên thiết bị cấu hình thấp. Phát hiện `ProductList` gây lag do không tối ưu Image Cache.
+- **Security Audit (Zero-Trust):** Phát hiện 3 chỗ dùng toán tử `!` (Force Unwrap) trong Flutter gây nguy cơ Crash (Red Screen).
+- **Process QC:** Flag lỗi "Scope Creep" khi phát hiện một số code cũ chứa các tính năng chưa bao giờ được liệt kê trong PRD.
 
 ---
 
-## 📝 Bước 3: Báo cáo kết quả (The Audit Report)
-**Agent:** `@docs-architect` tổng hợp báo cáo gửi User.
+## 🏛️ Bước 3: Architectural Stability Index
+**Agent:** `@clean-architecture-solid` đánh giá độ bền vững.
 
-| Hạng mục | Đánh giá | Đề xuất của Agent |
-| :--- | :--- | :--- |
-| **Bảo mật** | 🚩 Nguy hiểm | Vá lỗi SQL Injection và chuyển Secret Key sang Env. |
-| **Kiến trúc** | ⚠️ Trung bình | Tách logic khỏi UI layer để scale tốt hơn. |
-| **Hiệu năng** | ⚠️ Cần tối ưu | Sử dụng Isolate cho việc xử lý ảnh sản phẩm. |
+- **Stability Index:** Phát hiện file `OrderService` là một "God Class" (thay đổi quá thường xuyên, phụ thuộc quá nhiều).
+- **Directional Scan:** Phát hiện lỗi "Upward Import": Domain layer đang import thư viện UI.
+- **Decision:** Đề xuất một **ADR** để tách nhỏ `OrderService` thành các Sub-modules.
 
 ---
 
-## ✅ Kết luận
-Agent chỉ **chỉ ra lỗi** và **đưa ra giải pháp**. Nó đứng yên đợi lệnh của bạn thay vì tự ý "sửa hộ" mà chưa có sự đồng ý.
+## 🤖 Bước 4: Knowledge Mapping (RAG-Ready)
+**Agent:** `@docs-architect` tối ưu hóa tri thức.
+
+- **Stale Doc Audit:** Phát hiện file `SETUP.md` đã cũ 6 tháng so với phiên bản Flutter hiện tại. Đánh dấu `[LEGACY]` và viết bản mới.
+- **Mermaid Mapping:** Tự động vẽ lại Sequence Diagram cho luồng Thanh toán (Payment Flow) để AI dễ dàng "hiểu" kiến trúc trong tương lai.
+
+---
+
+## ✅ Bước 5: Kết quả & Đề xuất (Executive Summary)
+Agent trình bày báo cáo dưới dạng **Sovereign Report**:
+
+1. **Vấn đề nghiêm trọng:** Lỗi Crash Apple Pay (Priority 1).
+2. **Nợ kỹ thuật:** God Class `OrderService` (Cần refactor trong Sprint tới).
+3. **ROI:** Nếu sửa `ProductList` lag, tỉ lệ chuyển đổi (Conversion Rate) dự kiến tăng 5%.
+
+---
+
+## 💡 Triết lý "Sovereign Audit"
+Agent không chỉ tìm lỗi code, nó tìm **Rủi ro Kinh doanh (Business Risk)** và **Lỗ hổng Tri thức (Knowledge Gaps)**. Nó giúp bạn quản lý dự án như một CTO/CPO thực thụ.

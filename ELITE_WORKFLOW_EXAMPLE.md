@@ -1,77 +1,73 @@
-# 🚀 Elite Agent Workflow Example: Secure Profile Sync
+# 🚀 Elite Agent Workflow Example: Secure Profile Sync (Sovereign v9.0)
 
-Ví dụ này tái hiện cách bộ Agents phối hợp để thực hiện một tính năng phức tạp: **"Thêm xác thực sinh trắc học và đồng bộ Profile với Backend"**.
+Ví dụ này tái hiện cách bộ Agents phối hợp để thực hiện một tính năng phức tạp: **"Thêm xác thực sinh trắc học và đồng bộ Profile với Backend"** theo các giao thức mới nhất.
 
 ---
 
 ## 📂 Bối cảnh dự án (Current State)
-- **Frontend:** Flutter 3.10, sử dụng **GetX** (State Management), thụt lề **2 spaces**.
-- **Backend:** Python 3.10, **FastAPI**, **Pydantic V1**, thụt lề **4 spaces**.
-- **Quy tắc:** Không sử dụng Git, ưu tiên Local Convention tuyệt đối.
+- **Frontend:** Flutter 3.24, sử dụng **GetX**, thụt lề **2 spaces**.
+- **Backend:** Python 3.13 (Free-Threading), **FastAPI**, **Pydantic V2**.
+- **Di sản (Legacy):** Dự án cũ có kiến trúc "Fat Controller", không dùng Dependency Injection.
 
 ---
 
-## 🛠 Bước 1: Nghiên cứu & Lập bản đồ (The Elite Start)
-**Agent:** `@project-analyzer` thực hiện nhiệm vụ đầu tiên.
+## 🧠 Bước 1: Nghiên cứu & Sovereign Pop Quiz
+**Agent:** `@system-integrator` (Engineering Manager - EM) khởi động.
 
-- **Hành động:** 
-    - Quét `pubspec.yaml` và `pyproject.toml` để xác định phiên bản.
-    - **Symbol Mapping:** Tìm thấy `AuthController` và `UserRepository`.
-    - **Turn Compression:** Sử dụng `grep_search -C 5` để đọc `auth_controller.dart` và các dependencies của nó trong **1 lượt duy nhất**.
-- **Kết quả:** Phát hiện dự án đang dùng "Manual Dependency Injection" thay vì thư viện bên thứ ba.
-
----
-
-## 🧠 Bước 2: Điều phối & Lập kế hoạch (The Orchestration)
-**Agent:** `@system-integrator` tiếp nhận dữ liệu.
-
-- **Kế hoạch:**
-    1. **Task 1 (@android-kotlin-pro):** Viết module Native xác thực sinh trắc học.
-    2. **Task 2 (@flutter-expert):** Viết UI Profile sử dụng **GetX** (theo style dự án).
-    3. **Task 3 (@python-fastapi-backend):** Cập nhật API sử dụng **Pydantic V1** (theo SDK hiện tại).
+- **Hành động (Research):** 
+    - Quét DNA dự án: Xác định local style (GetX, 2 spaces).
+    - **Sovereign Pop Quiz:** Tự vấn: *"Tại sao dùng GetX cho Biometrics thay vì Native Bridge trực tiếp? Liệu việc này có làm vỡ logic auth hiện tại không?"*
+- **Kết quả:** Xác nhận việc dùng `local_auth` plugin là an toàn nhất cho bối cảnh này.
 
 ---
 
-## ✍️ Bước 3: Thực thi (The Local-First Implementation)
-**Agent:** `@flutter-expert` bắt đầu viết code.
+## 🏗️ Bước 2: Mental Simulation & ROI Analysis
+**Agent:** `@flutter-expert` lập kế hoạch.
 
-- **Hành động:** Viết `ProfilePage` và `ProfileController`.
-- **Nhập gia tùy tục:** 
-    - Sử dụng đúng cú pháp **GetX** (`obs`, `Obx`).
-    - Thụt lề đúng **2 spaces**.
-    - Tuyệt đối không cài thêm BLoC hay Riverpod dù đó là "Best Practice" chung.
-
----
-
-## 🔍 Bước 4: Kiểm định & Cố vấn (The Respectful Advisor)
-**Agent:** `@qa-code-review` tiến hành Audit.
-
-- **Kết quả Audit:**
-    - **Convention Check:** PASS (Khớp 100% style dự án).
-    - **Security Check:** PASS (Mã hóa khóa sinh trắc học an toàn).
-- **Elite Recommendation (Gợi ý tinh tế):**
-    - *"Tôi đã viết code theo GetX của bạn. Tuy nhiên, tôi nhận thấy Pydantic V1 ở Backend đang gặp lỗi hiệu năng khi xử lý JSON lớn. Bạn có muốn tôi nâng cấp lên **Pydantic V2** không? (Đây là lựa chọn không bắt buộc)."*
+- **Mental Dry Run:** Giả lập thay đổi trong "tâm trí": 
+    - *Check 1:* Thêm `BiometricService` có làm hỏng `AuthController` không? -> Cần dùng **Layered Bridge**.
+    - *Check 2:* Build runner có cần chạy lại không? -> Cần cập nhật `pubspec.yaml`.
+- **ROI Analysis:** Báo cáo cho User: *"Việc thêm Biometrics tốn khoảng 5 lượt (turns), mang lại bảo mật mức High cho User."*
 
 ---
 
-## 👤 Bước 5: Quyền quyết định của User
-- **Tình huống A (User từ chối):** "Không cần, cứ giữ nguyên Pydantic V1."
-    - **Agent:** "Đã rõ. Tôi sẽ giữ nguyên bối cảnh cũ và hoàn tất công việc."
-- **Tình huống B (User đồng ý):** "Ok, hãy nâng cấp Backend lên Pydantic V2."
-    - **Agent:** Kích hoạt `@python-fastapi-backend` để refactor lại toàn bộ Models.
+## ⚖️ Bước 3: Thực thi & Conflict Resolution
+**Agent:** `@flutter-expert` viết code.
+
+- **Tình huống Xung đột:** SOLID yêu cầu tách Repository, nhưng dự án hiện tại đang viết gộp logic vào Controller.
+- **Áp dụng Conflict Resolution:** 
+    1. **Authority:** `USER DIRECTIVE` > `LOCAL DNA` > `SOLID`.
+    2. **Bridge Strategy:** Agent giữ nguyên Controller cũ nhưng tạo một private wrapper `_BiometricHandler` bên trong để giữ logic sạch sẽ mà không phá vỡ cấu trúc cũ.
+- **In-Code ADR:** Thêm comment `// ARCH-DEBT: Gộp logic vào Controller để khớp với Legacy DNA, sẽ refactor sau.`
 
 ---
 
-## ✅ Bước 6: Hoàn tất & Đóng gói
-- **Hành động:** 
-    - Chạy `dart format .` và `ruff format`.
-    - Chạy `flutter analyze` để đảm bảo **Zero Warnings**.
-    - **Không dùng Git:** Kết thúc phiên làm việc trên Filesystem hiện tại.
+## 🛡️ Bước 4: QA Regression & Hardware Audit
+**Agent:** `@qa-code-review` tiến hành kiểm định.
+
+- **Automated Regression Audit:** Chạy quét lại toàn bộ luồng Login cũ để đảm bảo Biometrics không làm hỏng đăng nhập bằng mật khẩu.
+- **Hardware-Aware Profiling:** Kiểm tra mức tiêu thụ Pin và RAM khi gọi cảm biến vân tay. Phát hiện lỗi memory leak nếu không đóng stream -> Yêu cầu sửa code ngay lập tức.
 
 ---
 
-## 🔥 Tại sao luồng này lại "Elite"?
-1. **Zero Context Waste:** Agent hiểu dự án nhanh gấp 3 lần nhờ Symbol Mapping và Turn Compression.
-2. **True Agnostic:** Không quan tâm bạn dùng GetX hay Provider, nó sẽ "hóa thân" thành chuyên gia của thư viện đó.
-3. **Professional Ethics:** Nó tư vấn cho bạn (Advisor) nhưng luôn phục tùng lựa chọn của bạn (Local-First).
-4. **Failure Resilient:** Nếu Native code build lỗi, nó tự động **Backtrack** để tìm nguyên nhân thay vì đoán mò.
+## 📚 Bước 5: Docs-Code Sync & RAG Optimization
+**Agent:** `@docs-architect` cập nhật tài liệu.
+
+- **Sync Protocol:** Vì logic Auth thay đổi >30%, Agent tự động cập nhật `docs/AUTH_FLOW.md`.
+- **RAG-Optimization:** Viết tài liệu theo dạng "Chunk-Friendly" để Agent sau này dễ dàng tra cứu cách dùng Biometrics trong 1 lượt.
+- **ADR Update:** Ghi lại quyết định dùng Layered Bridge vào `docs/adr/ADR-004-Biometrics.md`.
+
+---
+
+## 🔄 Bước 6: Skill Patching & Self-Evolution
+- **Pattern Recognition:** Agent nhận thấy việc xử lý lỗi Biometrics trên Android 14 có một mẫu (pattern) lặp lại tốt hơn.
+- **Skill Patch:** Đề xuất cập nhật `skills/flutter-expert/SKILL.md` để lưu lại "Winning Logic" này cho các dự án tương lai.
+- **Finality:** Behavior verified + Structure audited + Docs synced.
+
+---
+
+## 🔥 Tại sao luồng này vượt trội?
+1. **Sovereign Control:** Không bao giờ "đoán mò", luôn tự vấn và báo cáo ROI.
+2. **Pragmatic Integrity:** Tôn trọng code cũ nhưng vẫn để lại "dấu vết" kiến trúc sạch (Scout Rule).
+3. **Zero Regression:** QA không chỉ xem code mới mà còn bảo vệ code cũ.
+4. **Knowledge Compound:** Hệ thống tự học (Self-evolve) sau mỗi task hoàn thành.
