@@ -26,12 +26,14 @@ This protocol enforces architectural integrity. It prioritizes the
 - **The Either Pattern:** Use `Either<Failure, Success>` for all domain-level 
   operations. Prohibit `throw` for expected failures.
 
-## 🛠️ 3. PRAGMATIC GOVERNANCE
-- **Anti-Fragile Shortcuts:** If a strict layer separation adds excessive 
-  boilerplate for a trivial feature, document it as a **Pragmatic Shortcut** 
-  in an ADR.
-- **Stability Index:** Proactively identify "fragile" modules (files that change 
-  too often and have too many dependencies).
+## 🏗️ 3. PRAGMATIC ARCHITECTURE & DEBT TRACKING
+- **The "Local-First" Compromise:** If strict layering is impossible due to 
+  legacy constraints, follow the **"Scout Rule"**: Leave the code slightly 
+  cleaner than you found it, but do not trigger a cascade of changes.
+- **In-Code ADRs:** When deviating from SOLID for pragmatic reasons, add a 
+  `// ARCH-DEBT: <Reason>` comment.
+- **Conflict Resolution:** In case of a clash with `qa-code-review`, the 
+  `system-integrator` (EM) has the final tie-breaking vote based on ROI.
 
 ## ✅ 4. ARCHITECTURAL AUDIT
 1. **Directional Scan:** MANDATORY failure for Upward Imports (e.g., `domain` 

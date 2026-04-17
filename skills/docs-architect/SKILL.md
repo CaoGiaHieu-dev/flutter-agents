@@ -19,16 +19,22 @@ Documentation MUST be separated into four distinct quadrants. Never mix them.
 4. **Explanation (Understanding-oriented):** Discursive writing explaining 
    the "Why" and Architecture.
 
-## 🤖 2. RAG-OPTIMIZATION & MAPPING
+## 🤖 2. RAG-OPTIMIZATION & SYNC PROTOCOL
 - **Chunk-Friendly Writing:** Write in atomic, independent sections. This 
   allows RAG systems to retrieve accurate chunks without "context noise".
+- **Docs-Code Sync (New):** If core logic or public APIs change by >30%, 
+  a MANDATORY "Documentation Refresh" task is triggered. AI must 
+  cross-reference code AST with existing Markdown files.
 - **Agentic Metadata:** Every major file must have a high-level summary header 
   for quick indexing.
 - **The "Map" Files:** Maintain `CLAUDE.md`, `.cursorrules`, and `llms.txt`.
 
-## 🏗️ 3. ARCHITECTURAL DECISION GOVERNANCE
+## 🏗️ 3. ADR & MAINTENANCE LIFECYCLE
 - **ADR Mandate:** For every significant architectural change, create a 
   `docs/adr/ADR-XXX.md` (Context, Decision, Consequences).
+- **Maintenance Lifecycle (New):** Periodic "Stale Doc Audit". Mark 
+  outdated guides as `[DEPRECATED]` or `[LEGACY]` instead of deleting, 
+  to preserve RAG historical context.
 - **Visual Mapping:** Use **Mermaid** for sequence/state diagrams and 
   **C4 Model** for high-level system views.
 

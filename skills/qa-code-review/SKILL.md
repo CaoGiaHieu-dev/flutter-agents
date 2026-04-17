@@ -18,12 +18,19 @@ Architectural Invariance, and Hardware-Aware Performance.**
   (CPU/SIMD) or **Memory-Bound** (Cache misses/Alignment).
 - **Resource Audit:** Check for CPU/RAM spikes and Battery impact (Mobile).
 
-## 🛡️ 2. CAUSAL MEMORY & IMMUNE SYSTEM
+## 🛡️ 2. CAUSAL MEMORY & REGRESSION AUDIT
 - **Error Chain DAG:** Record `Error -> Cause -> Fix` in causal memory.
+- **Automated Regression Audit (New):** Every new feature MUST trigger 
+  a scan of legacy core features to ensure zero regression. If automated 
+  tests are missing for legacy parts, the QA Agent MUST demand a 
+  "Legacy Test Patch" before proceeding.
 - **Immune Response:** Pre-emptively block known failure patterns.
 
-## 🏛️ 3. ARCHITECTURAL & SECURITY GOVERNANCE
+## 🏛️ 3. ARCHITECTURAL & PROCESS GOVERNANCE
 - **Boundary Audit:** Zero tolerance for Upward Imports (Domain -> UI).
+- **Process & Milestone QC (New):** Monitor Sprint Velocity and 
+  Milestone compliance. Flag "Scope Creep" immediately if a PR 
+  exceeds the original PRD intent.
 - **OWASP Compliance:** Parameterized queries, secret scanning, and 
   encrypted persistence.
 - **Zero-Trust Logic:** No `!` operators. Mandatory `mounted` checks.

@@ -18,14 +18,24 @@ Before any high-stakes execution (refactors, infrastructure changes):
 - **Honesty Check:** If a task is beyond your current context or 
   capability, STOP. Immediately notify the user instead of guessing.
 
-## 🏛️ 2. SELF-EVOLUTION PROTOCOL (New - Learning)
-- **Skill Patching:** If you find a superior technical pattern or a bug 
-  in the current `SKILL.md` files during execution, you are MANDATED to 
-  propose a **Skill Patch**. 
-- **Pattern Capture:** After a successful complex fix, update 
-  `AGENT_MEMORY.md` with the "Winning Logic" to evolve future reasoning.
+## 🏛️ 2. SELF-EVOLUTION & SKILL PATCHING (Enhanced)
+- **Pattern Recognition:** If a technical pattern or fix is used > 3 times, you are MANDATED to propose a **Skill Patch**.
+- **The Patch Workflow:**
+    1. Identify the limitation in the current `SKILL.md`.
+    2. Create a `skill_patch_vX.md` in the project root.
+    3. Present the "Before vs. After" and the ROI (Time saved/Safety gained).
+- **Pattern Capture:** Update `AGENT_MEMORY.md` with "Winning Logic" after every complex task.
 
-## 🚀 3. ORCHESTRATION & TOKEN GOVERNANCE
+## ⚖️ 3. CONFLICT RESOLUTION PROTOCOL (New)
+When "Best Practices" (e.g., SOLID) conflict with "Local DNA" (Legacy code):
+1. **The Authority Hierarchy:** 
+   `USER DIRECTIVE` > `LOCAL PROJECT DNA` > `GLOBAL BEST PRACTICES`.
+2. **The "Bridge" Strategy:** If the legacy code is messy, do NOT force-refactor. Instead, implement a **Layered Bridge**:
+   - Keep the legacy interface.
+   - Inject the "Clean" logic inside a private wrapper.
+3. **Escalation:** If a change risks breaking 2+ unrelated modules, STOP and use `ask_user` with 3 options: (A) Pure Refactor (High risk), (B) Pragmatic Patch (Med risk), (C) Legacy Clone (Low risk).
+
+## 🚀 4. ORCHESTRATION & TOKEN GOVERNANCE
 - **Token Circuit Breaker:** Stop and report if in a loop (> 3 turns).
 - **Multi-Agent Handover:** Generate 5-line "Atomic State" for transfers.
 - **ROI Matrix:** Analyze Cost (Tokens) vs. Benefit (Velocity) in `<thinking>`.
