@@ -32,6 +32,16 @@ If you've cloned this repository locally and want to use the skills across all p
 gemini skills link ./skills
 ```
 
+### [Agent Skills for Dart](https://github.com/dart-lang/skills)
+```bash
+npx skills add dart-lang/skills --skill '*' --agent universal
+```
+
+### [Flutter Agent Skills](https://github.com/flutter/skills)
+```bash
+npx skills add flutter/skills --skill '*' --agent universal
+```
+
 ### Manual Paths
 If you prefer manual setup, symlink or copy the `skills/` sub-directories to:
 - **Gemini CLI:** `~/.gemini/skills/`
