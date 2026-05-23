@@ -33,19 +33,37 @@ gemini skills link ./skills
 ```
 
 ### [Agent Skills for Dart](https://github.com/dart-lang/skills)
+Using **Gemini / Antigravity CLI**:
+```bash
+gemini skills install https://github.com/dart-lang/skills.git
+# or
+antigravity skills install https://github.com/dart-lang/skills.git
+```
+
+Using **npx skills**:
 ```bash
 npx skills add dart-lang/skills --skill '*' --agent universal
 ```
 
 ### [Flutter Agent Skills](https://github.com/flutter/skills)
+Using **Gemini / Antigravity CLI**:
+```bash
+gemini skills install https://github.com/flutter/skills.git
+# or
+antigravity skills install https://github.com/flutter/skills.git
+```
+
+Using **npx skills**:
 ```bash
 npx skills add flutter/skills --skill '*' --agent universal
 ```
 
 ### Manual Paths
 If you prefer manual setup, symlink or copy the `skills/` sub-directories to:
-- **Gemini CLI:** `~/.gemini/skills/`
-- **Antigravity:** `~/.gemini/antigravity/skills/`
+- **Gemini CLI (Legacy):** `~/.gemini/skills/`
+- **Antigravity CLI/IDE (Legacy):** `~/.gemini/antigravity/skills/`
+- **Gemini/Antigravity CLI (v2.0+):** `~/.gemini/config/skills/`
+- **Antigravity IDE (v2.0+):** `~/.gemini/antigravity-ide/skills/`
 
 ---
 

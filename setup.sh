@@ -11,6 +11,8 @@ SKILLS_DIR="$SCRIPT_DIR/skills"
 
 GEMINI_SKILLS_DIR="$HOME/.gemini/skills"
 ANTIGRAVITY_SKILLS_DIR="$HOME/.gemini/antigravity/skills"
+GEMINI_CONFIG_SKILLS_DIR="$HOME/.gemini/config/skills"
+ANTIGRAVITY_IDE_SKILLS_DIR="$HOME/.gemini/antigravity-ide/skills"
 
 echo "🚀 Starting Agent Skills Setup..."
 
@@ -44,11 +46,34 @@ link_skills() {
     done
 }
 
-# Thực hiện cho Gemini CLI
+# Thực hiện cho Gemini CLI (Legacy)
 link_skills "$GEMINI_SKILLS_DIR" "Gemini CLI"
 
-# Thực hiện cho Antigravity
+# Thực hiện cho Antigravity (Legacy)
 link_skills "$ANTIGRAVITY_SKILLS_DIR" "Google Antigravity"
+
+# Thực hiện cho Gemini/Antigravity CLI (v2.0+)
+link_skills "$GEMINI_CONFIG_SKILLS_DIR" "Gemini/Antigravity CLI (v2.0+)"
+
+# Thực hiện cho Antigravity IDE (v2.0+)
+link_skills "$ANTIGRAVITY_IDE_SKILLS_DIR" "Antigravity IDE (v2.0+)"
+
+echo ""
+echo "📦 Installing external Dart & Flutter skills..."
+if command -v gemini &> /dev/null; then
+    echo "Installing Dart skills via Gemini CLI..."
+    gemini skills install https://github.com/dart-lang/skills.git
+    echo "Installing Flutter skills via Gemini CLI..."
+    gemini skills install https://github.com/flutter/skills.git
+elif command -v antigravity &> /dev/null; then
+    echo "Installing Dart skills via Antigravity CLI..."
+    antigravity skills install https://github.com/dart-lang/skills.git
+    echo "Installing Flutter skills via Antigravity CLI..."
+    antigravity skills install https://github.com/flutter/skills.git
+else
+    echo "⚠️ Warning: Neither Gemini CLI nor Antigravity CLI was found in PATH."
+    echo "Skipping automatic installation of external Dart/Flutter skills."
+fi
 
 echo ""
 echo "✅ Setup Complete!"
