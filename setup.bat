@@ -64,24 +64,65 @@ for /d %%S in ("%SKILLS_DIR%\*") do (
 )
 
 echo.
-echo Installing external Dart and Flutter skills...
-where gemini >nul 2>nul
+echo Installing external Dart skills...
+set "TEMP_DART=%TEMP%\dart-skills-%RANDOM%"
+git clone --depth 1 https://github.com/dart-lang/skills.git "%TEMP_DART%" >nul 2>nul
 if %ERRORLEVEL% equ 0 (
-    echo Installing Dart skills via Gemini CLI...
-    call gemini skills install https://github.com/dart-lang/skills.git
-    echo Installing Flutter skills via Gemini CLI...
-    call gemini skills install https://github.com/flutter/skills.git
-) else (
-    where antigravity >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
-        echo Installing Dart skills via Antigravity CLI...
-        call antigravity skills install https://github.com/dart-lang/skills.git
-        echo Installing Flutter skills via Antigravity CLI...
-        call antigravity skills install https://github.com/flutter/skills.git
-    ) else (
-        echo Warning: Neither Gemini CLI nor Antigravity CLI was found in PATH.
-        echo Skipping automatic installation of external Dart/Flutter skills.
+    for /d %%S in ("%TEMP_DART%\skills\*") do (
+        set "FULL_PATH=%%~fS"
+        set "SKILL_NAME=%%~nS"
+        echo    - Installing !SKILL_NAME!...
+        
+        set "T1=%GEMINI_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T1!" rmdir /s /q "!T1!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T1!" >nul 2>nul
+
+        set "T2=%ANTIGRAVITY_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T2!" rmdir /s /q "!T2!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T2!" >nul 2>nul
+
+        set "T3=%GEMINI_CONFIG_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T3!" rmdir /s /q "!T3!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T3!" >nul 2>nul
+
+        set "T4=%ANTIGRAVITY_IDE_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T4!" rmdir /s /q "!T4!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T4!" >nul 2>nul
     )
+    rmdir /s /q "%TEMP_DART%" 2>nul
+) else (
+    echo [Warning] Failed to clone dart-lang/skills. Please check your internet connection.
+)
+
+echo.
+echo Installing external Flutter skills...
+set "TEMP_FLUTTER=%TEMP%\flutter-skills-%RANDOM%"
+git clone --depth 1 https://github.com/flutter/skills.git "%TEMP_FLUTTER%" >nul 2>nul
+if %ERRORLEVEL% equ 0 (
+    for /d %%S in ("%TEMP_FLUTTER%\skills\*") do (
+        set "FULL_PATH=%%~fS"
+        set "SKILL_NAME=%%~nS"
+        echo    - Installing !SKILL_NAME!...
+        
+        set "T1=%GEMINI_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T1!" rmdir /s /q "!T1!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T1!" >nul 2>nul
+
+        set "T2=%ANTIGRAVITY_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T2!" rmdir /s /q "!T2!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T2!" >nul 2>nul
+
+        set "T3=%GEMINI_CONFIG_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T3!" rmdir /s /q "!T3!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T3!" >nul 2>nul
+
+        set "T4=%ANTIGRAVITY_IDE_SKILLS_DIR%\!SKILL_NAME!"
+        if exist "!T4!" rmdir /s /q "!T4!" 2>nul
+        xcopy /e /i /y /q "!FULL_PATH!" "!T4!" >nul 2>nul
+    )
+    rmdir /s /q "%TEMP_FLUTTER%" 2>nul
+) else (
+    echo [Warning] Failed to clone flutter/skills. Please check your internet connection.
 )
 
 echo.

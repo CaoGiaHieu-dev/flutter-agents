@@ -60,20 +60,36 @@ link_skills "$ANTIGRAVITY_IDE_SKILLS_DIR" "Antigravity IDE (v2.0+)"
 
 echo ""
 echo "📦 Installing external Dart & Flutter skills..."
-if command -v gemini &> /dev/null; then
-    echo "Installing Dart skills via Gemini CLI..."
-    gemini skills install https://github.com/dart-lang/skills.git
-    echo "Installing Flutter skills via Gemini CLI..."
-    gemini skills install https://github.com/flutter/skills.git
-elif command -v antigravity &> /dev/null; then
-    echo "Installing Dart skills via Antigravity CLI..."
-    antigravity skills install https://github.com/dart-lang/skills.git
-    echo "Installing Flutter skills via Antigravity CLI..."
-    antigravity skills install https://github.com/flutter/skills.git
-else
-    echo "⚠️ Warning: Neither Gemini CLI nor Antigravity CLI was found in PATH."
-    echo "Skipping automatic installation of external Dart/Flutter skills."
-fi
+
+install_external_skills() {
+    local repo_url=$1
+    local name=$2
+    local temp_dir
+    temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'skills')
+    
+    echo "📦 Installing external $name skills..."
+    if git clone --depth 1 "$repo_url" "$temp_dir" &> /dev/null; then
+        for skill_path in "$temp_dir/skills"/*; do
+            if [ -d "$skill_path" ]; then
+                skill_name=$(basename "$skill_path")
+                echo "   🔗 Installing $skill_name..."
+                
+                for dest in "$GEMINI_SKILLS_DIR" "$ANTIGRAVITY_SKILLS_DIR" "$GEMINI_CONFIG_SKILLS_DIR" "$ANTIGRAVITY_IDE_SKILLS_DIR"; do
+                    if [ -d "$dest" ]; then
+                        rm -rf "$dest/$skill_name"
+                        cp -R "$skill_path" "$dest/$skill_name"
+                    fi
+                done
+            fi
+        done
+        rm -rf "$temp_dir"
+    else
+        echo "⚠️ Warning: Failed to clone $name skills from $repo_url. Skipping."
+    fi
+}
+
+install_external_skills "https://github.com/dart-lang/skills.git" "Dart"
+install_external_skills "https://github.com/flutter/skills.git" "Flutter"
 
 echo ""
 echo "✅ Setup Complete!"
