@@ -33,11 +33,8 @@ systems using **Python 3.13.1+** standards.
 2. **Testing:** Mandatory `pytest-asyncio` coverage for all new endpoints.
 3. **Thread Safety:** When using `python3.13t`, audit all third-party 
    libraries for thread-safety.
-4. **80-Column Rule:** All docs and Python code must follow 80-column wrapping.
+4. **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ LOCAL-FIRST & LEGACY COMPLIANCE
-- **Local Protocol:** Follow local project DNA (conventions/formatting) 
-  strictly. Do not force-upgrade Pydantic V1 to V2 or sync to async.
-- **Legacy Respect:** Preserve legacy code. No improvisation or refactoring 
-  without a direct user mandate.
-- **One-Time Inquiry:** Ask before changing. If denied, stop immediately.
+## 🛡️ GLOBAL COMPLIANCE
+- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+

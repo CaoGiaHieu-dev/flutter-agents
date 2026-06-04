@@ -14,7 +14,10 @@ ANTIGRAVITY_SKILLS_DIR="$HOME/.gemini/antigravity/skills"
 GEMINI_CONFIG_SKILLS_DIR="$HOME/.gemini/config/skills"
 ANTIGRAVITY_IDE_SKILLS_DIR="$HOME/.gemini/antigravity-ide/skills"
 
-echo "🚀 Starting Agent Skills Setup..."
+echo "🚀 Starting Agent Skills Setup (Sovereign v9.0)..."
+echo "✨ Supported Skills: Flutter, Kotlin, Swift, C++, FastAPI, PM, QA,"
+echo "                   Common Rules, Web Frontend, DevOps, DB, Agent Workflow"
+echo ""
 
 # Kiểm tra thư mục skills
 if [ ! -d "$SKILLS_DIR" ]; then

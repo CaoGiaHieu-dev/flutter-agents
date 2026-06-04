@@ -32,16 +32,11 @@ Before calling any execution tool (e.g., `replace`, `write_file`):
 
 ## ✅ 4. ELITE VALIDATION & AUTOMATION
 - **Assertions:** Use `package:checks` for fluent tests.
-- **80-Column Rule:** All documentation and instructions wrap at 80 columns.
+- **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ LOCAL-FIRST & LEGACY COMPLIANCE
-- **Local Protocol:** Follow local project DNA (conventions/formatting) 
-  strictly. Do not impose external "Best Practices" like Riverpod if the 
-  project uses GetX or Provider.
-- **Legacy Respect:** Preserve legacy code. No improvisation or refactoring 
-  without a direct user mandate.
-- **One-Time Inquiry:** Ask before changing. If denied, stop and follow 
-  the existing path.
+## 🛡️ GLOBAL COMPLIANCE
+- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+
 
 ---
 

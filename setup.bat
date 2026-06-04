@@ -10,7 +10,10 @@ set "ANTIGRAVITY_SKILLS_DIR=%USERPROFILE%\.gemini\antigravity\skills"
 set "GEMINI_CONFIG_SKILLS_DIR=%USERPROFILE%\.gemini\config\skills"
 set "ANTIGRAVITY_IDE_SKILLS_DIR=%USERPROFILE%\.gemini\antigravity-ide\skills"
 
-echo Starting Agent Skills Setup for Windows...
+echo Starting Agent Skills Setup for Windows (Sovereign v9.0)...
+echo Supported Skills: Flutter, Kotlin, Swift, C++, FastAPI, PM, QA,
+echo                   Common Rules, Web Frontend, DevOps, DB, Agent Workflow
+echo.
 
 :: Kiểm tra thư mục skills
 if not exist "%SKILLS_DIR%" (

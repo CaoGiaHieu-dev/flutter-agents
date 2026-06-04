@@ -50,12 +50,8 @@ When "Best Practices" (e.g., SOLID) conflict with "Local DNA" (Legacy code):
 
 ## 🚨 5. CRISIS & FAULT ISOLATION
 In a crash: Isolate the **Fault Boundary** -> Trace to **Domain State**.
-**80-Column Rule:** All reports and instructions wrap at 80 columns.
+- **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ 6. LOCAL-FIRST & LEGACY MANDATE (New - Priority)
-- **Local Supremacy:** Local project rules (conventions, formatting, style) 
-  ALWAYS override general "Best Practices".
-- **Legacy Integrity:** Respect and preserve legacy code. NEVER refactor or 
-  improvise on existing code unless explicitly directed.
-- **Inquiry Protocol:** Ask before any non-trivial change. If the user 
-  denies the proposal, DO NOT ask again for the same context.
+## 🛡️ 6. GLOBAL COMPLIANCE
+- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+

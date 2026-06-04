@@ -38,13 +38,8 @@ latest evolution of **Swift 6.1**.
 ## ✅ 5. EXECUTION QUALITY GATE
 1. **Linter:** Zero warnings from `SwiftLint`.
 2. **Tests:** Exhaustive `TestStore` validation with `exhaustivity: .exhaustive`.
-3. **80-Column Rule:** All docs and Swift code must follow 80-column wrapping.
+3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ LOCAL-FIRST & LEGACY COMPLIANCE
-- **Local Protocol:** Follow local project DNA (conventions/formatting) 
-  strictly. Do not impose TCA or Swift 6 Concurrency if the project is 
-  not ready or uses different patterns.
-- **Legacy Respect:** Preserve legacy code. No improvisation or refactoring 
-  without a direct user mandate.
-- **One-Time Inquiry:** Ask before changing. If denied, stop and follow 
-  the existing path.
+## 🛡️ GLOBAL COMPLIANCE
+- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+

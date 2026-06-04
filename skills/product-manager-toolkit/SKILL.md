@@ -38,4 +38,5 @@ and **Failure-Aware**.
 ## 📊 4. AI OBSERVABILITY & KPIS
 - **Drift & Bias Monitoring:** Define KPIs for monitoring performance 
   post-launch.
-- **80-Column Rule:** All PRDs and user stories must follow 80-column wrapping.
+- **Global Constraints:** Refer to `@common-rules` for global constraints (80-column wrapping).
+

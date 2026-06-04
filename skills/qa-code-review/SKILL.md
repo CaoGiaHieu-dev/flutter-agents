@@ -38,11 +38,8 @@ Architectural Invariance, and Hardware-Aware Performance.**
 ## ✅ 4. THE AUDIT VERDICT & SCORE
 Grade 1-10: Complexity, Stability, and Hardware-Efficiency.
 - **Autonomous Backtrack:** If standards fail, demand EM re-strategy.
-- **80-Column Rule:** All docs wrap at 80 columns.
+- **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ 5. LOCAL-FIRST & LEGACY AUDIT (New)
-- **Convention Enforcement:** Fail any change that deviates from local 
-  conventions (naming, style, indentation) in favor of external standards.
-- **Legacy Preservation:** Audit for unrequested refactors. If an 
-  improvisation is found without user consent, it is a MANDATORY failure.
-- **Refusal Memory:** Respect previous user denials for specific changes.
+## 🛡️ 5. GLOBAL AUDIT COMPLIANCE
+- Audit all changes against `@common-rules`, enforcing strict compliance with the 80-column rule, local DNA supremacy, and legacy preservation mandates. Fail any unrequested refactoring.
+

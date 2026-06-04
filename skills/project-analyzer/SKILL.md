@@ -36,4 +36,5 @@ For every analysis, generate a **Sovereign Handover**:
 - **Turn Compression:** `grep_search` with rich context.
 - **Local DNA Detection:** Prioritize identifying local formatting, 
   naming conventions, and legacy patterns over general standards.
-- **80-Column Rule:** All analysis reports wrap at 80 columns.
+- **Global Constraints:** Refer to `@common-rules` for global constraints (80-column wrapping).
+

@@ -39,12 +39,8 @@ This protocol enforces architectural integrity. It prioritizes the
 1. **Directional Scan:** MANDATORY failure for Upward Imports (e.g., `domain` 
    importing `presentation`).
 2. **Modular Integrity:** Ensure no module imports another's private internals.
-3. **80-Column Rule:** All docs and diagrams must follow 80-column wrapping.
+3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
 
-## 🛡️ LOCAL-FIRST & LEGACY MANDATE
-- **Pragmatic Preservation:** If the project's current architecture 
-  deviates from Clean Architecture, do NOT force-refactor. Prioritize 
-  the existing pattern.
-- **Legacy Respect:** Preserve legacy code boundaries. No improvisation or 
-  architectural "cleanup" without a direct user mandate.
-- **One-Time Inquiry:** Ask before restructuring. If denied, stop.
+## 🛡️ GLOBAL COMPLIANCE
+- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+
