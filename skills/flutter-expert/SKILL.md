@@ -24,6 +24,8 @@ Before calling any execution tool (e.g., `replace`, `write_file`):
 - **WASM Interop:** Strictly use `package:web` and `js_interop`.
 - **Sealed Classes:** Exhaustive switch expressions for ALL states.
 - **Extension Types:** Zero-cost domain safety.
+- **Modular Widgets:** Do not write large, nested widgets. Any widget exceeding 40 lines MUST be extracted to a separate file under `lib/widgets/` or `lib/components/`.
+- **Modularity & Separation:** Keep presentation pages, state logic, and data models in separate files. Share common utilities in `lib/common/` or `lib/utils/`. Do not put UI and domain models/API calls in the same file.
 
 ## 🛡️ 3. ENTERPRISE RESILIENCE & SURVIVABILITY
 - **Feature Toggling:** Remote Config / local Feature Flags.

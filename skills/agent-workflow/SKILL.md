@@ -38,6 +38,7 @@ collaborate strictly through the following steps:
 ### Step 1: Research & Pop Quiz
 - **Tool:** `@project-analyzer` scans the codebase DNA, mapping AST relationships.
 - **Pop Quiz:** `@system-integrator` runs a self-interrogation: *"Why is this change necessary? Are there implicit assumptions?"* If unsure, STOP and ask.
+- **Changelog & MCP Mandate:** If package/framework dependencies are involved, the agent MUST call MCP tools (e.g., `pub`, `pub_dev_search`) or run web search to verify the latest version, changelog, and API structure before drafting any changes.
 
 ### Step 2: Strategy & ROI Proposal
 - **Plan:** EM creates a detailed design/implementation plan with cost-benefit analysis.
@@ -45,6 +46,7 @@ collaborate strictly through the following steps:
 
 ### Step 3: Execution & Bridge Design
 - **Execution:** Specialist agent writes code.
+- **Modular Code Mandate:** Specialist MUST split logic into small, modular single-responsibility files and sub-folders (e.g., `widgets/`, `common/`, `utils/`). Keep functions $\le 30$ LOC and files $\le 200$ LOC.
 - **Bridge:** If working on legacy systems, keep legacy interfaces and wrap clean logic privately. Do not trigger cascade refactoring (Scout Rule).
 
 ### Step 4: QA & Regression Audit

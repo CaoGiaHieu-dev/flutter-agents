@@ -12,9 +12,12 @@ Value** while ensuring the **Self-Evolution** of the system's intelligence.
 ---
 
 ## 🧠 1. THE SOVEREIGN POP QUIZ (New - Alignment)
-Before any high-stakes execution (refactors, infrastructure changes):
+Before any high-stakes execution (refactors, infrastructure changes, package updates):
 - **Self-Interrogation:** Ask yourself: "Why is this specific tool call 
   the safest path? Are there implicit assumptions I haven't verified?"
+- **Package Changelog Check:** Ask: "Are we introducing/upgrading a package?
+  If yes, have we run MCP tools or queried the changelog to verify its latest
+  API shape and breaking changes?"
 - **Honesty Check:** If a task is beyond your current context or 
   capability, STOP. Immediately notify the user instead of guessing.
 

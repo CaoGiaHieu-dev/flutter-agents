@@ -58,14 +58,15 @@ Every codebase submission MUST track:
 MANDATORY METRICS:
 - Unused Imports Count:        ≤ 0 (must remove)
 - Dead Code Paths:             ≤ 0 (must document/remove)
-- Cyclomatic Complexity:       ≤ 12 per function
-- Function Length:             ≤ 50 lines (suggest extract)
+- Cyclomatic Complexity:       ≤ 10 per function
+- Function Length:             ≤ 30 lines (must extract/split)
+- File Length (LOC):           ≤ 200 lines (must split into subfiles)
 - Parameter Count:             ≤ 4 (suggest param object)
 - Magic Numbers:               ≤ 0 (must use named constants)
 - Test Coverage (Domain):      ≥ 70%
 - Type Annotations Missing:    ≤ 0 (must annotate)
 - Nesting Depth (if/loops):   ≤ 3 levels
-- God Class Size:              ≤ 300 lines
+- God Class/Widget Size:       ≤ 200 lines
 
 SCORING:
 - All metrics green → Grade A (Excellent)
@@ -156,9 +157,37 @@ CLEANUP: api.fetch()
 4. **APPLY Phase:** Auto-apply safe changes
 5. **COMMIT Phase:** Single cleanup commit with rationale
 
+### 4.4 Modular Code Splitting Standards
+
+All development tasks MUST proactively split logic instead of aggregating:
+- **Directory Isolation:** Separate code by domain layer and feature type:
+  - Common helpers go to `lib/common/` or `lib/utils/`.
+  - Reusable visual widgets go to `lib/widgets/` or `lib/components/`.
+  - Feature-specific code goes to `lib/features/<feature_name>/`.
+- **Single-Responsibility Files:** A file must only contain one primary
+  class or widget. Do not bundle multiple classes/widgets into one file.
+- **Function Decomposition:** Keep functions below 30 lines. If a function
+  does more than one thing (e.g. data fetching + formatting + state setting),
+  extract the steps into well-named private helper functions.
+
 ---
 
-## 🔒 5. ZERO-TRUST LOGIC & ERROR HANDLING
+## 📦 5. PACKAGE & FRAMEWORK GOVERNANCE (NEW)
+
+To prevent API compatibility errors and version mismatch regressions:
+- **Mandatory Changelog Auditing:** Before adding or upgrading any
+  package/framework, the agent MUST inspect the package's changelog, release
+  notes, and breaking changes.
+- **MCP & Tooling First:** The agent MUST use available MCP tools (such as
+  `pub`, `pub_dev_search`) or web search to find correct, compatible package
+  versions and verify recent API modifications. Never guess APIs.
+- **Strict Version Locking:** Pin package versions in the package manifest
+  (e.g., `pubspec.yaml`, `package.json`, `requirements.txt`) unless a range
+  is explicitly approved.
+
+---
+
+## 🔒 6. ZERO-TRUST LOGIC & ERROR HANDLING
 
 - **Null Safety:** Avoid unsafe operators (like `!` in Dart/Kotlin/
   Swift) unless compile-time proven safe.
@@ -171,7 +200,7 @@ CLEANUP: api.fetch()
 
 ---
 
-## 📊 6. CLEANUP REPORTS & METRICS (NEW - v2.0)
+## 📊 7. CLEANUP REPORTS & METRICS (NEW - v2.0)
 
 After cleanup, MUST generate report:
 
