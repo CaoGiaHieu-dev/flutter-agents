@@ -1,46 +1,84 @@
 ---
 name: clean-architecture-solid
-description: Master System Architect specializing in DDD, SOLID, and 
-             Functional Domain Modeling. Enforces Modular Monolith and 
-             Event-Driven patterns.
+description: >-
+  System architect for DDD, SOLID, and layered architecture.
+  Provides decision trees for architecture choices, modular
+  monolith patterns, and pragmatic debt tracking.
 ---
-# 🏛️ Master System Architect & Clean Engineering Protocol (Master Edition)
+# Clean Architecture & SOLID — Design Protocol
 
-This protocol enforces architectural integrity. It prioritizes the 
-**Modular Monolith** pattern for scalability and **DDD** for logic.
+This skill enforces architectural integrity and provides
+decision frameworks for structural choices.
 
 ---
 
-## 🏗️ 1. MODULAR MONOLITH & LAYER INTEGRITY
-- **Strict Separation:** Divide the project into independent **Modules** 
-  communicating only via **Public Interfaces**.
-- **Layer Boundary Enforcement:** 
-    1. **Domain (Core):** Pure logic. ZERO dependencies on frameworks.
-    2. **Application (Use Cases):** Orchestrates domain logic.
-    3. **Infrastructure (Adapters):** External SDKs, DB, APIs.
-    4. **Presentation (UI):** Framework-specific logic (BLoC/SwiftUI).
+## 1. LAYER INTEGRITY
 
-## ⚡ 2. EVENT-DRIVEN & FUNCTIONAL DESIGN
-- **Event-Driven Architecture (EDA):** Use Domain Events for cross-module 
-  communication to prevent tight coupling.
-- **The Either Pattern:** Use `Either<Failure, Success>` for all domain-level 
-  operations. Prohibit `throw` for expected failures.
+Strict separation into independent layers:
 
-## 🏗️ 3. PRAGMATIC ARCHITECTURE & DEBT TRACKING
-- **The "Local-First" Compromise:** If strict layering is impossible due to 
-  legacy constraints, follow the **"Scout Rule"**: Leave the code slightly 
-  cleaner than you found it, but do not trigger a cascade of changes.
-- **In-Code ADRs:** When deviating from SOLID for pragmatic reasons, add a 
-  `// ARCH-DEBT: <Reason>` comment.
-- **Conflict Resolution:** In case of a clash with `qa-code-review`, the 
-  `system-integrator` (EM) has the final tie-breaking vote based on ROI.
+```
+Domain (Core)        → Pure logic. ZERO framework dependencies.
+Application          → Use cases. Orchestrates domain logic.
+Infrastructure       → External: APIs, DB, SDKs, file system.
+Presentation (UI)    → Framework-specific: BLoC, SwiftUI, etc.
+```
 
-## ✅ 4. ARCHITECTURAL AUDIT
-1. **Directional Scan:** MANDATORY failure for Upward Imports (e.g., `domain` 
-   importing `presentation`).
-2. **Modular Integrity:** Ensure no module imports another's private internals.
-3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+**Rules:**
+- Dependencies point INWARD only (UI → App → Domain).
+- Domain NEVER imports from Presentation or Infrastructure.
+- Cross-module communication via public interfaces only.
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+## 2. ARCHITECTURE DECISION TREE
 
+Use this to choose the right approach:
+
+```
+Is this a new feature or modifying existing?
+├── New feature:
+│   ├── Standalone? → Create new feature module.
+│   └── Cross-cutting? → Add to shared/common module.
+└── Modifying existing:
+    ├── Is existing code well-structured?
+    │   ├── Yes → Follow existing patterns.
+    │   └── No → Use Bridge Strategy (keep legacy,
+    │           wrap clean logic privately).
+    └── Does change touch > 2 modules?
+        ├── Yes → STOP, propose plan to user.
+        └── No → Proceed with targeted change.
+```
+
+## 3. DOMAIN-DRIVEN DESIGN (DDD)
+
+- **Entities:** Identity-based, mutable state. Rich behavior.
+- **Value Objects:** Equality by value. Immutable.
+- **Use Cases:** Single operation per class. Receives
+  repository interface, returns `Either<Failure, Result>`.
+- **Domain Events:** For cross-module communication.
+  Prevent tight coupling between features.
+
+## 4. THE EITHER PATTERN
+
+Use `Either<Failure, Success>` for all domain operations:
+
+- Prohibit `throw` for expected failures.
+- Define typed `Failure` sealed classes per feature.
+- Map infrastructure exceptions to domain failures at
+  the repository boundary.
+
+## 5. PRAGMATIC ARCHITECTURE
+
+- **Scout Rule:** Leave code slightly cleaner than found,
+  but do NOT trigger cascade refactoring.
+- **Bridge Strategy:** When legacy is messy:
+  1. Keep legacy interface intact.
+  2. Inject clean logic inside a private wrapper.
+  3. Mark with `// ARCH-DEBT: <reason>`.
+- **Priority:** `USER DIRECTIVE > LOCAL DNA > SOLID`
+
+## 6. AUDIT CHECKS
+
+1. **Directional scan:** FAIL if upward imports detected
+   (e.g., `domain` importing `presentation`).
+2. **Module boundary:** No module imports another's privates.
+3. **Interface segregation:** No "god" interfaces with > 5
+   methods — split into focused contracts.

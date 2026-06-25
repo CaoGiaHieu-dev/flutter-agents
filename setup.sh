@@ -1,99 +1,119 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Setup Script for Agent Skills (macOS/Linux Version)
-# Đảm bảo đường dẫn tuyệt đối và dọn dẹp link cũ trước khi tạo mới.
+# Setup Script for Agent Skills (v2.0)
+# Installs skills with full subdirectory support (references/, scripts/, examples/)
+# Cleans old links/dirs before creating new ones.
 
-set -e
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILLS_DIR="${SCRIPT_DIR}/skills"
+GEMINI_CONFIG_SKILLS_DIR="${HOME}/.gemini/config/skills"
+ANTIGRAVITY_IDE_SKILLS_DIR="${HOME}/.gemini/antigravity-ide/skills"
 
-# Lấy đường dẫn tuyệt đối của thư mục chứa script này
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SKILLS_DIR="$SCRIPT_DIR/skills"
-
-GEMINI_SKILLS_DIR="$HOME/.gemini/skills"
-ANTIGRAVITY_SKILLS_DIR="$HOME/.gemini/antigravity/skills"
-GEMINI_CONFIG_SKILLS_DIR="$HOME/.gemini/config/skills"
-ANTIGRAVITY_IDE_SKILLS_DIR="$HOME/.gemini/antigravity-ide/skills"
-
-echo "🚀 Starting Agent Skills Setup (Sovereign v9.0)..."
-echo "✨ Supported Skills: Flutter, Kotlin, Swift, C++, FastAPI, PM, QA,"
-echo "                   Common Rules, Web Frontend, DevOps, DB, Agent Workflow"
+echo "============================================"
+echo " Agent Skills Setup (v2.0)"
+echo "============================================"
 echo ""
 
-# Kiểm tra thư mục skills
-if [ ! -d "$SKILLS_DIR" ]; then
-    echo "❌ Error: 'skills' directory not found at $SKILLS_DIR"
+# Validate source directory
+if [ ! -d "${SKILLS_DIR}" ]; then
+    echo "[ERROR] 'skills' directory not found at ${SKILLS_DIR}"
     exit 1
 fi
 
-# Hàm tạo liên kết
-link_skills() {
-    local target_root=$1
-    local tool_name=$2
-    
-    echo "📦 Linking skills for $tool_name to $target_root..."
-    mkdir -p "$target_root"
-    
-    for skill_path in "$SKILLS_DIR"/*; do
-        if [ -d "$skill_path" ]; then
-            skill_name=$(basename "$skill_path")
-            target_link="$target_root/$skill_name"
-            
-            echo "   🔗 Linking $skill_name..."
-            
-            # Xóa link/thư mục cũ nếu tồn tại
-            rm -rf "$target_link"
-            
-            # Tạo symbolic link mới
-            ln -s "$skill_path" "$target_link"
-        fi
-    done
-}
+# Create target directories
+mkdir -p "${GEMINI_CONFIG_SKILLS_DIR}"
+mkdir -p "${ANTIGRAVITY_IDE_SKILLS_DIR}"
 
-# Thực hiện cho Gemini CLI (Legacy)
-link_skills "$GEMINI_SKILLS_DIR" "Gemini CLI"
+link_skill() {
+    local src="$1"
+    local target_dir="$2"
+    local skill_name
+    skill_name="$(basename "${src}")"
+    local target="${target_dir}/${skill_name}"
 
-# Thực hiện cho Antigravity (Legacy)
-link_skills "$ANTIGRAVITY_SKILLS_DIR" "Google Antigravity"
-
-# Thực hiện cho Gemini/Antigravity CLI (v2.0+)
-link_skills "$GEMINI_CONFIG_SKILLS_DIR" "Gemini/Antigravity CLI (v2.0+)"
-
-# Thực hiện cho Antigravity IDE (v2.0+)
-link_skills "$ANTIGRAVITY_IDE_SKILLS_DIR" "Antigravity IDE (v2.0+)"
-
-echo ""
-echo "📦 Installing external Dart & Flutter skills..."
-
-install_external_skills() {
-    local repo_url=$1
-    local name=$2
-    local temp_dir
-    temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'skills')
-    
-    echo "📦 Installing external $name skills..."
-    if git clone --depth 1 "$repo_url" "$temp_dir" &> /dev/null; then
-        for skill_path in "$temp_dir/skills"/*; do
-            if [ -d "$skill_path" ]; then
-                skill_name=$(basename "$skill_path")
-                echo "   🔗 Installing $skill_name..."
-                
-                for dest in "$GEMINI_SKILLS_DIR" "$ANTIGRAVITY_SKILLS_DIR" "$GEMINI_CONFIG_SKILLS_DIR" "$ANTIGRAVITY_IDE_SKILLS_DIR"; do
-                    if [ -d "$dest" ]; then
-                        rm -rf "$dest/$skill_name"
-                        cp -R "$skill_path" "$dest/$skill_name"
-                    fi
-                done
-            fi
-        done
-        rm -rf "$temp_dir"
-    else
-        echo "⚠️ Warning: Failed to clone $name skills from $repo_url. Skipping."
+    # Remove existing link/dir
+    if [ -L "${target}" ] || [ -d "${target}" ]; then
+        rm -rf "${target}"
     fi
+
+    # Create symlink (includes all subdirs: references/, scripts/, etc.)
+    ln -sf "${src}" "${target}" 2>/dev/null || {
+        # Fallback to copy if symlink fails
+        cp -r "${src}" "${target}"
+        echo "      [WARN] Symlink failed, copied instead"
+    }
 }
 
-install_external_skills "https://github.com/dart-lang/skills.git" "Dart"
-install_external_skills "https://github.com/flutter/skills.git" "Flutter"
+echo "[1/3] Linking local skills (with references)..."
+echo ""
+
+for skill_dir in "${SKILLS_DIR}"/*/; do
+    [ -d "${skill_dir}" ] || continue
+    skill_name="$(basename "${skill_dir}")"
+    echo "   - ${skill_name}"
+
+    link_skill "${skill_dir}" "${GEMINI_CONFIG_SKILLS_DIR}"
+    link_skill "${skill_dir}" "${ANTIGRAVITY_IDE_SKILLS_DIR}"
+done
 
 echo ""
-echo "✅ Setup Complete!"
-echo "💡 You can now use these skills in Gemini CLI or Antigravity."
+echo "[2/3] Installing external Dart skills..."
+
+TEMP_DART="$(mktemp -d)"
+if git clone --depth 1 https://github.com/dart-lang/skills.git "${TEMP_DART}" 2>/dev/null; then
+    for skill_dir in "${TEMP_DART}"/skills/*/; do
+        [ -d "${skill_dir}" ] || continue
+        skill_name="$(basename "${skill_dir}")"
+        echo "   - ${skill_name}"
+
+        # Copy (not symlink) since source is temp
+        target1="${GEMINI_CONFIG_SKILLS_DIR}/${skill_name}"
+        [ -d "${target1}" ] && rm -rf "${target1}"
+        cp -r "${skill_dir}" "${target1}"
+
+        target2="${ANTIGRAVITY_IDE_SKILLS_DIR}/${skill_name}"
+        [ -d "${target2}" ] && rm -rf "${target2}"
+        cp -r "${skill_dir}" "${target2}"
+    done
+    rm -rf "${TEMP_DART}"
+    echo "   [OK] Dart skills installed."
+else
+    echo "   [WARN] Failed to clone dart-lang/skills."
+    rm -rf "${TEMP_DART}"
+fi
+
+echo ""
+echo "[3/3] Installing external Flutter skills..."
+
+TEMP_FLUTTER="$(mktemp -d)"
+if git clone --depth 1 https://github.com/flutter/skills.git "${TEMP_FLUTTER}" 2>/dev/null; then
+    for skill_dir in "${TEMP_FLUTTER}"/skills/*/; do
+        [ -d "${skill_dir}" ] || continue
+        skill_name="$(basename "${skill_dir}")"
+        echo "   - ${skill_name}"
+
+        target1="${GEMINI_CONFIG_SKILLS_DIR}/${skill_name}"
+        [ -d "${target1}" ] && rm -rf "${target1}"
+        cp -r "${skill_dir}" "${target1}"
+
+        target2="${ANTIGRAVITY_IDE_SKILLS_DIR}/${skill_name}"
+        [ -d "${target2}" ] && rm -rf "${target2}"
+        cp -r "${skill_dir}" "${target2}"
+    done
+    rm -rf "${TEMP_FLUTTER}"
+    echo "   [OK] Flutter skills installed."
+else
+    echo "   [WARN] Failed to clone flutter/skills."
+    rm -rf "${TEMP_FLUTTER}"
+fi
+
+echo ""
+echo "============================================"
+echo " Setup Complete!"
+echo " Skills linked to:"
+echo "   - ${GEMINI_CONFIG_SKILLS_DIR}"
+echo "   - ${ANTIGRAVITY_IDE_SKILLS_DIR}"
+echo " Note: Symlinks include references/,"
+echo "       scripts/, and all subdirectories."
+echo "============================================"

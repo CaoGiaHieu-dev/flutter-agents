@@ -1,48 +1,84 @@
 ---
 name: docs-architect
-description: Principal Documentation Architect. Enforces Diátaxis framework, 
-             industrial-grade API docs, and RAG-optimized project maps.
+description: >-
+  Documentation architect. Enforces Diataxis framework,
+  RAG-optimized writing, ADR lifecycle, and docs-code sync
+  protocol with Mermaid/C4 diagrams.
 ---
-# 📚 Principal Documentation & Knowledge Architect Protocol (Master Edition)
+# Documentation & Knowledge — Architecture Protocol
 
-This protocol ensures all project knowledge is organized for maximum clarity 
-for humans and maximum searchability for AI Agents (**RAG-Optimized**).
+This skill governs all documentation creation and maintenance.
 
 ---
 
-## 🏛️ 1. THE DIÁTAXIS MANDATE (Strict Structural Separation)
-Documentation MUST be separated into four distinct quadrants. Never mix them.
-1. **Tutorials (Learning-oriented):** Step-by-step lessons for beginners.
-2. **How-to Guides (Task-oriented):** Practical recipes for specific problems.
-3. **Reference (Information-oriented):** Austere, factual descriptions 
-   (APIs, Classes).
-4. **Explanation (Understanding-oriented):** Discursive writing explaining 
-   the "Why" and Architecture.
+## 1. DIATAXIS FRAMEWORK (Structural Separation)
 
-## 🤖 2. RAG-OPTIMIZATION & SYNC PROTOCOL
-- **Chunk-Friendly Writing:** Write in atomic, independent sections. This 
-  allows RAG systems to retrieve accurate chunks without "context noise".
-- **Docs-Code Sync (New):** If core logic or public APIs change by >30%, 
-  a MANDATORY "Documentation Refresh" task is triggered. AI must 
-  cross-reference code AST with existing Markdown files.
-- **Agentic Metadata:** Every major file must have a high-level summary header 
-  for quick indexing.
-- **The "Map" Files:** Maintain `CLAUDE.md`, `.cursorrules`, and `llms.txt`.
+Separate documentation into four distinct types. Never mix:
 
-## 🏗️ 3. ADR & MAINTENANCE LIFECYCLE
-- **ADR Mandate:** For every significant architectural change, create a 
-  `docs/adr/ADR-XXX.md` (Context, Decision, Consequences).
-- **Maintenance Lifecycle (New):** Periodic "Stale Doc Audit". Mark 
-  outdated guides as `[DEPRECATED]` or `[LEGACY]` instead of deleting, 
-  to preserve RAG historical context.
-- **Visual Mapping:** Use **Mermaid** for sequence/state diagrams and 
-  **C4 Model** for high-level system views.
+| Type           | Purpose              | Tone          |
+|----------------|----------------------|---------------|
+| **Tutorial**   | Learning by doing    | Guiding       |
+| **How-to**     | Solve a specific task| Practical     |
+| **Reference**  | Factual API/class desc| Austere      |
+| **Explanation**| Why & architecture   | Discursive    |
 
-## ✅ 4. DOCUMENTATION QUALITY GATE
-1. **Exhaustivity:** Are all public members documented?
-2. **Verifiability:** Are the steps in the How-to guides reproducible?
-3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+## 2. WRITING STANDARDS
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+- **Atomic sections:** Write self-contained sections that make
+  sense when retrieved individually (RAG-friendly).
+- **Summary headers:** Every major file starts with a 2-3 line
+  summary explaining its purpose and scope.
+- **Code examples:** Include runnable examples in how-to guides.
+  Mark language in fenced code blocks for syntax highlighting.
+- **File links:** Use markdown links to reference source files
+  (`[ClassName](file:///path/to/file.dart#L10-L20)`).
 
+## 3. DOCS-CODE SYNC PROTOCOL
+
+- **Trigger:** If a code change modifies public APIs by > 30%,
+  flag documentation update as required.
+- **Scope:** Update affected reference docs, how-to guides,
+  and architectural diagrams.
+- **Stale docs:** Mark outdated guides as `[DEPRECATED]` or
+  `[LEGACY]` instead of deleting — preserves historical context.
+
+## 4. ADR (Architecture Decision Records)
+
+For every significant architectural decision, create:
+
+```
+docs/adr/ADR-NNN-<title>.md
+```
+
+**Template:**
+
+```markdown
+# ADR-NNN: <Title>
+Date: <YYYY-MM-DD>
+Status: Accepted | Superseded | Deprecated
+
+## Context
+What is the situation that requires a decision?
+
+## Decision
+What was decided and why?
+
+## Consequences
+What are the trade-offs and impacts?
+```
+
+## 5. VISUAL DOCUMENTATION
+
+- **Mermaid diagrams:** Use for sequence diagrams, state
+  machines, and flowcharts. Embed in markdown.
+- **C4 Model:** Use for system-level architecture views
+  (Context, Container, Component, Code).
+- **Keep diagrams next to code:** Store in `docs/` directory,
+  not in external tools.
+
+## 6. QUALITY GATE
+
+1. All public APIs and classes have doc comments.
+2. How-to guides are reproducible (tested steps).
+3. No orphaned docs (referencing deleted code).
+4. ADRs exist for all major architectural decisions.

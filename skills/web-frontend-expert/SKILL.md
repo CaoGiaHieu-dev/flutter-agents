@@ -1,49 +1,87 @@
 ---
 name: web-frontend-expert
-description: Elite Web Frontend Architect. Specializes in React, Next.js, 
-             TypeScript, Tailwind CSS, and Web Vitals optimization.
+description: >-
+  Web frontend architect. Covers React, Next.js (App Router),
+  Vite, TypeScript, CSS/Tailwind, Web Vitals, SEO, and
+  accessibility (a11y) standards.
 ---
-# 🌐 Elite Web Frontend Architect Protocol (Sovereign v9.0)
+# Web Frontend — Expert Development Protocol
 
-You are the Principal Web Frontend Architect. Your mission is to build highly
-performant, accessible (a11y), responsive, and SEO-optimized web applications.
+This skill governs all web frontend development.
 
 ---
 
-## 🏗️ 1. MODERN WEB STACK MANDATES
-- **React & Next.js (App Router):**
-    - Prefer Server Components (RSC) for data fetching to minimize client-side
-      JavaScript payload.
-    - Strictly use `'use client'` only at leaf-node interactive components.
-    - Leverage Next.js dynamic routing, intercepting routes, and parallel routes
-      when handling complex dashboard layouts.
-- **Type-Safety (TypeScript):**
-    - 100% strict TypeScript types. Prohibit the use of `any`.
-    - Use Zod for client-side and API contract input validation.
-- **Styling (CSS & Tailwind):**
-    - Write clean, semantic utility classes. 
-    - Group Tailwind classes logically using standard conventions. Use `cn()`
-      clsx/tailwind-merge helper for dynamic classes.
+## 1. PROJECT DNA DETECTION
 
-## ⚡ 2. PERFORMANCE & WEB VITALS
-- **Core Web Vitals:** Optimize for LCP (<2.5s), FID (<100ms), and CLS (<0.1).
-- **Image Optimization:** Strictly use Next.js `<Image />` or standard `srcset`
-  with explicit dimensions to prevent layout shifts.
-- **Code Splitting:** Proactively chunk large libraries (e.g., charts, editors)
-  via React `lazy` or Next.js `dynamic` imports.
+Scan `package.json` and config files to identify:
 
-## 📈 3. SEO & ACCESSIBILITY (A11Y)
-- **Metadata API:** Use Next.js Static/Dynamic Metadata API (generating sitemaps,
-  robots, Open Graph tags).
-- **Semantic HTML:** Use proper tags (`<main>`, `<section>`, `<article>`,
-  `<header>`, `<footer>`, `<nav>`) to structure the page.
-- **A11y:** Ensure high color contrast, full keyboard navigation capability, and
-  proper ARIA attributes for dynamic components.
+- **Framework:** Next.js (App Router) vs Vite+React vs Vue
+  vs Svelte vs vanilla HTML/JS.
+- **Styling:** Tailwind CSS vs CSS Modules vs styled-components.
+- **TypeScript:** Strict mode enabled?
+- **Build tool:** Webpack vs Vite vs Turbopack.
 
-## ✅ 4. COMPLIANCE & QUALITY GATE
-1. **Linter:** `next lint` and `tsc` must pass with zero errors.
-2. **Bundle Size:** Warn if a page bundle exceeds 100KB (first-load JS).
-3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+Match the existing stack. If no stack exists, prefer Vite
+for SPAs and Next.js for SSR/SEO-critical apps.
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+## 2. REACT & NEXT.JS
+
+- **Server Components (RSC):** Prefer for data fetching to
+  minimize client-side JavaScript.
+- **`'use client'`:** Only at leaf-node interactive components.
+  Never on layout or page-level components.
+- **Dynamic routing:** Use intercepting routes and parallel
+  routes for complex layouts (dashboards, modals).
+- **Metadata API:** Use static/dynamic metadata for SEO
+  (title, description, Open Graph, sitemap, robots).
+
+## 3. VITE & VANILLA
+
+When using Vite or vanilla JS:
+
+- Use ES modules and dynamic imports for code splitting.
+- Configure `vite.config.ts` with proper aliases and
+  build optimization.
+- For vanilla projects, structure with clear separation:
+  `index.html`, `styles/`, `scripts/`, `assets/`.
+
+## 4. TYPESCRIPT & TYPE SAFETY
+
+- 100% strict TypeScript. Prohibit `any`.
+- Use Zod for runtime input validation and API contracts.
+- Prefer `interface` for object shapes, `type` for unions.
+- Export types alongside their implementations.
+
+## 5. PERFORMANCE & WEB VITALS
+
+- **LCP** < 2.5s: Optimize critical rendering path.
+- **FID/INP** < 200ms: Keep main thread responsive.
+- **CLS** < 0.1: Set explicit dimensions on images/media.
+- **Image optimization:** Use `<Image />` (Next.js) or
+  `srcset` with explicit dimensions.
+- **Code splitting:** Chunk large libraries (charts, editors)
+  via `lazy` or `dynamic` imports.
+
+## 6. STYLING
+
+- **Tailwind:** Group classes logically. Use `cn()` (clsx +
+  tailwind-merge) for dynamic classes.
+- **CSS Modules:** Prefer for component-scoped styles when
+  Tailwind is not used.
+- **Dark mode:** Support via CSS custom properties or
+  Tailwind's `dark:` variant.
+
+## 7. ACCESSIBILITY (A11Y)
+
+- Semantic HTML: `<main>`, `<nav>`, `<section>`, `<article>`.
+- High color contrast (4.5:1 minimum).
+- Full keyboard navigation capability.
+- ARIA attributes for dynamic components.
+- `prefers-reduced-motion` respected.
+
+## 8. QUALITY GATE
+
+1. `tsc` and `next lint` → zero errors.
+2. Lighthouse score ≥ 90 on Performance, A11y, SEO.
+3. Bundle size: warn if page JS > 100KB (first-load).
+4. Test: component tests with React Testing Library.

@@ -1,45 +1,85 @@
 ---
 name: qa-code-review
-description: Elite Security & Governance Auditor. Enforces 'Zero-Trust' 
-             coding, OWASP, and Hardware-Aware performance profiling.
+description: >-
+  Quality assurance and code review auditor. Enforces
+  zero-trust coding, regression prevention, actionable
+  checklists, and tool-driven verification.
 ---
-# ⚖️ Elite Security & Governance Auditor Protocol (Sovereign v9.0)
+# QA & Code Review — Audit Protocol
 
-You are the final Quality Gate. Your mission is **Zero-Trust Security, 
-Architectural Invariance, and Hardware-Aware Performance.**
+This skill defines the quality gate for all code changes.
+Use it when reviewing, auditing, or validating any submission.
 
 ---
 
-## 🛡️ 1. HARDWARE-AWARE PROFILING (New)
-- **Telemetry Mandate:** Do not accept "Performance Optimizations" based 
-  on vibes. Demand or run actual profiling tools (`perf`, `nsys`, 
-  `flutter devtools`, `py-spy`).
-- **Bottleneck Diagnosis:** Identify if the code is **Compute-Bound** 
-  (CPU/SIMD) or **Memory-Bound** (Cache misses/Alignment).
-- **Resource Audit:** Check for CPU/RAM spikes and Battery impact (Mobile).
+## 1. PRE-REVIEW CHECKLIST
 
-## 🛡️ 2. CAUSAL MEMORY & REGRESSION AUDIT
-- **Error Chain DAG:** Record `Error -> Cause -> Fix` in causal memory.
-- **Automated Regression Audit (New):** Every new feature MUST trigger 
-  a scan of legacy core features to ensure zero regression. If automated 
-  tests are missing for legacy parts, the QA Agent MUST demand a 
-  "Legacy Test Patch" before proceeding.
-- **Immune Response:** Pre-emptively block known failure patterns.
+Run through this checklist for every code review:
 
-## 🏛️ 3. ARCHITECTURAL & PROCESS GOVERNANCE
-- **Boundary Audit:** Zero tolerance for Upward Imports (Domain -> UI).
-- **Process & Milestone QC (New):** Monitor Sprint Velocity and 
-  Milestone compliance. Flag "Scope Creep" immediately if a PR 
-  exceeds the original PRD intent.
-- **OWASP Compliance:** Parameterized queries, secret scanning, and 
-  encrypted persistence.
-- **Zero-Trust Logic:** No `!` operators. Mandatory `mounted` checks.
+### Correctness
+- [ ] Does the change do what the requirement asks?
+- [ ] Are edge cases handled (null, empty, overflow)?
+- [ ] Are async operations properly guarded (`mounted`,
+      lifecycle, cancellation)?
 
-## ✅ 4. THE AUDIT VERDICT & SCORE
-Grade 1-10: Complexity, Stability, and Hardware-Efficiency.
-- **Autonomous Backtrack:** If standards fail, demand EM re-strategy.
-- **Global Constraints:** Inherit all global constraints from `@common-rules`.
+### Safety
+- [ ] No `!` operators unless compile-time proven safe.
+- [ ] No hardcoded secrets, keys, or passwords.
+- [ ] Input validation on all user-facing entry points.
+- [ ] SQL queries parameterized (no string concatenation).
 
-## 🛡️ 5. GLOBAL AUDIT COMPLIANCE
-- Audit all changes against `@common-rules`, enforcing strict compliance with the 80-column rule, local DNA supremacy, and legacy preservation mandates. Fail any unrequested refactoring.
+### Architecture
+- [ ] No upward imports (domain → UI is FORBIDDEN).
+- [ ] No module accessing another module's private internals.
+- [ ] Change is scoped to the task — no unrelated refactoring.
 
+### Performance
+- [ ] No N+1 queries in data fetching.
+- [ ] No unnecessary rebuilds in reactive UI (BLoC/Provider).
+- [ ] Heavy operations off the main thread/isolate.
+- [ ] No memory leaks (unclosed streams, controllers).
+
+### Testing
+- [ ] New logic has corresponding test coverage.
+- [ ] Existing tests still pass after the change.
+- [ ] If legacy code lacks tests and you are modifying it,
+      add a minimal regression test first.
+
+## 2. TOOL-DRIVEN VERIFICATION
+
+Use these tools to verify — don't rely on visual inspection:
+
+| Check                  | Tool / Command              |
+|------------------------|-----------------------------|
+| Static analysis        | MCP `analyze_files`         |
+| Lint auto-fix          | MCP `dart_fix`              |
+| Run all tests          | MCP `run_tests`             |
+| Runtime errors         | MCP `get_runtime_errors`    |
+| Format consistency     | MCP `dart_format`           |
+| Dead code / unused     | `grep_search` for imports   |
+
+## 3. REGRESSION PREVENTION
+
+- Every new feature triggers a scan of related legacy flows
+  to ensure zero regression.
+- If automated tests are missing for affected legacy code,
+  demand a minimal test patch before approving the change.
+- Record recurring errors as `Error → Cause → Fix` chains
+  for future reference.
+
+## 4. AUDIT VERDICT
+
+Grade the submission 1-10 on three dimensions:
+
+| Dimension        | What to evaluate                  |
+|------------------|-----------------------------------|
+| **Correctness**  | Logic accuracy, edge cases        |
+| **Stability**    | Error handling, null safety       |
+| **Maintainability** | Readability, modularity, tests |
+
+- Score ≥ 8 → Approve.
+- Score 5-7 → Approve with required follow-up items.
+- Score < 5 → Block. Require rework.
+
+If standards fail, escalate to the user with specific
+issues and suggested fixes.

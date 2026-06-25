@@ -1,47 +1,117 @@
 ---
 name: flutter-expert
-description: The Definitive Elite Flutter & Dart Architect. A synthesis of 
-             Google's 'dash_skills', Mental Simulation logic, and Next-Gen 
-             Web/GPU optimizations.
+description: >-
+  Elite Flutter & Dart architect. Covers widget composition,
+  state management (Provider/BLoC/Riverpod), navigation,
+  performance (Impeller, shaders), and modern Dart 3 patterns
+  (sealed classes, pattern matching, extension types).
 ---
-# 👑 Master Flutter & Dart Architect Protocol (God-Tier v8.0)
+# Flutter & Dart — Expert Development Protocol
 
-This protocol is the absolute mandate for Flutter development. It 
-prioritizes resilience, extreme performance, and Mental Simulation.
-
----
-
-## 🧠 1. DYNAMIC CONTEXT & MENTAL SIMULATION (New)
-Before calling any execution tool (e.g., `replace`, `write_file`):
-- **Mental Dry Run:** Simulate the change in your "mind".
-    - Check 1: Will this change break existing imports?
-    - Check 2: Does this introduce a `BuildContext` gap?
-    - Check 3: Is the `build_runner` dependency updated?
-- **Persona Alignment:** Switch to the specific purist mode (BLoC/Riverpod).
-
-## 🏗️ 2. MODERN DART & NEXT-GEN ENGINE
-- **Impeller & GPU:** Use **Flutter GPU API** for custom shaders.
-- **WASM Interop:** Strictly use `package:web` and `js_interop`.
-- **Sealed Classes:** Exhaustive switch expressions for ALL states.
-- **Extension Types:** Zero-cost domain safety.
-- **Modular Widgets:** Do not write large, nested widgets. Any widget exceeding 40 lines MUST be extracted to a separate file under `lib/widgets/` or `lib/components/`.
-- **Modularity & Separation:** Keep presentation pages, state logic, and data models in separate files. Share common utilities in `lib/common/` or `lib/utils/`. Do not put UI and domain models/API calls in the same file.
-
-## 🛡️ 3. ENTERPRISE RESILIENCE & SURVIVABILITY
-- **Feature Toggling:** Remote Config / local Feature Flags.
-- **Shader Warmup:** Implement warmup for first-frame Android performance.
-- **Crash Observability:** Infrastructure-level breadcrumb logging.
-
-## ✅ 4. ELITE VALIDATION & AUTOMATION
-- **Assertions:** Use `package:checks` for fluent tests.
-- **Global Constraints:** Inherit all global constraints from `@common-rules`.
-
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
-
+This skill governs all Flutter and Dart development.
+Follow these mandates whenever writing or modifying Flutter code.
 
 ---
 
-## 🚨 5. ADVERSARIAL AUDIT
-Perform a "Self-Attack": Memory Leaks, Race Conditions, and WASM 
-compatibility audit before submission.
+## 1. PROJECT DNA DETECTION
+
+Before writing code, scan the project to identify:
+
+- **State management:** Provider, BLoC, Riverpod, GetX, or other.
+- **Navigation:** GoRouter, auto_route, Navigator 2.0, or custom.
+- **DI approach:** get_it, injectable, provider, or manual.
+- **Dart version:** Check `pubspec.yaml` → `environment.sdk`.
+- **Code style:** Indentation (2 or 4 spaces), naming conventions.
+
+**Tool:** Use `grep_search` on `pubspec.yaml` and `lib/` to
+detect patterns. Use MCP `analyze_files` for health baseline.
+
+Match the existing DNA — do not introduce a competing pattern.
+
+## 2. MODERN DART 3 MANDATES
+
+- **Sealed classes:** Use for state modeling. Enforce exhaustive
+  `switch` expressions for all state variants.
+- **Pattern matching:** Prefer `switch` expressions and
+  `if-case` over chains of `if-else` / `is` checks.
+- **Extension types:** Use for zero-cost domain wrappers
+  (e.g., `extension type UserId(String id) implements String`).
+- **Records:** Use for returning multiple values instead of
+  creating throwaway classes.
+- **Constructors:** Use `super.key` (not deprecated `Key? key`).
+
+## 3. WIDGET & FILE STRUCTURE
+
+- **Single responsibility:** One primary widget per file.
+- **Widget size limit:** Any widget exceeding 40 lines MUST be
+  extracted to a separate file.
+- **File size limit:** Max 200 lines per file. Split into
+  sub-widgets, helpers, or extensions if exceeded.
+- **Directory layout:**
+  ```
+  lib/features/<feature>/
+  ├── data/          # Repositories, DTOs, data sources
+  ├── domain/        # Entities, use cases, interfaces
+  ├── presentation/  # Pages, widgets, state (BLoC/VM)
+  └── <feature>.dart # Barrel file (optional)
+  ```
+- **Shared code:** Common widgets → `lib/widgets/` or
+  `lib/components/`. Utilities → `lib/common/` or `lib/utils/`.
+
+## 4. STATE MANAGEMENT RULES
+
+Follow the project's existing pattern. General rules:
+
+- **Provider:** Use `ChangeNotifier` with `Consumer` or
+  `context.watch/read`. Register at route level.
+- **BLoC:** Use `sealed` events/states. Prefer `Bloc` over
+  `Cubit` for complex flows.
+- **Riverpod:** Use code generation (`@riverpod`) when possible.
+- **Any pattern:** Never call state-changing logic inside
+  `build()`. Use `initState`, `ref.listen`, or equivalent.
+
+## 5. PERFORMANCE & RESILIENCE
+
+- **Impeller:** Design for Impeller renderer (default on iOS,
+  opt-in Android). Avoid `saveLayer` and complex clip paths.
+- **Shader warmup:** Implement `ShaderWarmUp` for first-frame
+  performance on Android when using custom shaders.
+- **const constructors:** Use `const` wherever possible to
+  enable widget caching.
+- **Async safety:** Always check `mounted` before calling
+  `setState` after an `await`.
+- **Error handling:** Use `Result`/`Either` pattern for domain
+  operations. Avoid throwing for expected failures.
+
+## 6. NAVIGATION (GoRouter / auto_route)
+
+- Define routes declaratively in a single file.
+- Use typed route parameters (not raw `String` parsing).
+- Handle deep links and redirect logic explicitly.
+- Wrap route-level providers at the route builder, not globally.
+
+## 7. TOOL PLAYBOOK
+
+Use these MCP tools during development:
+
+| When                    | Tool                          |
+|-------------------------|-------------------------------|
+| Check code health       | `analyze_files`               |
+| Auto-fix lint issues    | `dart_fix`                    |
+| Format code             | `dart_format`                 |
+| Run tests               | `run_tests`                   |
+| Hot reload after change | `hot_reload`                  |
+| Search pub packages     | `pub_dev_search`              |
+| Add/upgrade dependency  | `pub` (pub add, pub upgrade)  |
+| Check runtime errors    | `get_runtime_errors`          |
+| Inspect widget tree     | `get_widget_tree`             |
+
+## 8. QUALITY GATE
+
+Before submitting any Flutter change:
+
+1. `analyze_files` → zero errors, zero warnings.
+2. `dart_format` → consistent formatting.
+3. `run_tests` → all existing tests pass.
+4. Manual check: no `!` operators unless compile-time proven,
+   no `print()` statements left in production code.

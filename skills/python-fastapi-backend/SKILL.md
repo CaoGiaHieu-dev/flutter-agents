@@ -1,40 +1,69 @@
 ---
 name: python-fastapi-backend
-description: Elite Python & Backend Architect. Expert in FastAPI, 
-             Python 3.13 Free-Threading, and Agent-ready API design.
+description: >-
+  Python backend architect. Covers FastAPI, Pydantic V2,
+  SQLAlchemy 2.0 async, Alembic migrations, and modern
+  Python 3.12+ patterns.
 ---
-# 🐍 Elite Python Backend & Agentic Protocol (Next-Gen v7.0)
+# Python & FastAPI — Backend Development Protocol
 
-This protocol ensures high-performance, asynchronous, and AI-ready backend 
-systems using **Python 3.13.1+** standards.
+This skill governs all Python backend development.
 
 ---
 
-## 🏗️ 1. MODERN PYTHON & FASTAPI
-- **Pydantic V2 Strict:** Use V2 syntax, `Annotated` types, and 
-  `model_validate`. 
-- **Type-Safety:** Enforce 100% type hinting. Conform to `mypy --strict`.
+## 1. PROJECT DNA DETECTION
 
-## ⚡ 2. PERFORMANCE & PARALLELISM (New)
-- **Free-Threading Optimization (Python 3.13):** For CPU-bound 
-  orchestration (e.g., local RAG or data parsing), utilize the new 
-  **no-GIL** (free-threaded) build to achieve 4x-5x throughput.
-- **JIT Governance:** Enable `PYTHON_JIT=1` only for long-running worker 
-  nodes to minimize memory overhead.
-- **Async I/O:** Use `AsyncSession` with SQLAlchemy 2.0. 
+Scan `pyproject.toml`, `requirements.txt`, or `setup.py`:
 
-## 🤖 3. AGENT-READY API DESIGN
-- **Self-Documenting Tools:** Design API endpoints with rich OpenAPI 
-  metadata so other AI agents can consume them.
-- **Predictable Errors:** Standardize 4xx/5xx responses with clear `code`.
+- **Framework:** FastAPI vs Django vs Flask.
+- **ORM:** SQLAlchemy 2.0 vs Tortoise vs raw SQL.
+- **Validation:** Pydantic V2 vs V1 vs dataclasses.
+- **Package manager:** uv (preferred) vs pip vs poetry.
+- **Python version:** Check for 3.12+ features.
 
-## ✅ 4. BACKEND QUALITY GATE
-1. **Ruff First:** MANDATORY use of **Ruff** for linting and formatting.
-2. **Testing:** Mandatory `pytest-asyncio` coverage for all new endpoints.
-3. **Thread Safety:** When using `python3.13t`, audit all third-party 
-   libraries for thread-safety.
-4. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+## 2. MODERN PYTHON & FastAPI
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+- **Pydantic V2:** Use V2 syntax, `Annotated` types, and
+  `model_validate()`. Never use deprecated V1 patterns.
+- **Type safety:** 100% type hints. Target `mypy --strict`.
+- **Dependency injection:** Use FastAPI's `Depends()` system.
+  Create reusable dependency functions.
+- **Router organization:** Group endpoints by feature in
+  separate router files. Use `APIRouter` with prefix/tags.
 
+## 3. ASYNC & PERFORMANCE
+
+- **Async I/O:** Use `AsyncSession` with SQLAlchemy 2.0 for
+  database operations. Never block the event loop.
+- **Background tasks:** Use FastAPI `BackgroundTasks` for
+  non-blocking operations. For heavy work, use task queues
+  (Celery, ARQ).
+- **Connection pooling:** Configure pool size and overflow
+  limits for database connections.
+
+## 4. DATABASE & MIGRATIONS (Alembic)
+
+- **Alembic setup:** Use `alembic init` with async template.
+- **Migration safety:**
+  1. Add columns WITHOUT constraints first.
+  2. Backfill existing rows in batches.
+  3. Add constraints with non-blocking commands.
+- **Every migration MUST have a rollback (`downgrade`).**
+- **Naming convention:** Use descriptive revision messages.
+
+## 5. API DESIGN
+
+- **Self-documenting:** Rich OpenAPI metadata (summary,
+  description, response models) on every endpoint.
+- **Error standardization:** Consistent error response schema
+  with `code`, `message`, `detail` fields.
+- **Versioning:** Use URL prefix (`/api/v1/`) for versioning.
+- **Input validation:** Use Zod-equivalent Pydantic validators
+  with custom error messages.
+
+## 6. QUALITY GATE
+
+1. **Ruff** for linting AND formatting (replaces black+flake8).
+2. `pytest-asyncio` coverage for all endpoints.
+3. `mypy --strict` → zero errors.
+4. No secrets in code — use environment variables.

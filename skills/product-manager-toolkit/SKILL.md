@@ -1,42 +1,94 @@
 ---
 name: product-manager-toolkit
-description: Senior Product Manager & AI Strategist. Expert in Agentic PRDs, 
-             Failure Modes, and North Star alignment.
+description: >-
+  Product management and requirements engineering. Provides
+  actionable PRD templates, user story formats, RICE
+  prioritization, and acceptance criteria standards.
 ---
-# 📈 Senior Product Manager & AI Strategic Protocol (Master Edition)
+# Product Manager — Requirements & Strategy Protocol
 
-This protocol ensures requirements are user-centric, **Agent-Executable**, 
-and **Failure-Aware**.
+This skill structures product requirements so they are
+precise, testable, and directly executable by developers.
 
 ---
 
-## 🏗️ 1. THE AGENTIC PRD (2025 Standard)
-- **Value Proposition:** Define the high-value problem the AI/System solves.
-- **Model Behavior & Constraints:** Define the expected "personality", 
-    tone, and safety boundaries for AI features.
-- **User Feedback Loop (New):** MANDATORY analysis of error logs, user 
-    analytics (A/B testing), and feedback tickets to refine the PRD 
-    iteratively.
-- **Local Compliance:** PRDs MUST respect local architectural constraints 
-    and legacy code realities.
-- **Failure Modes & Recovery:** Define what happens when the system fails 
-    or the AI "hallucinates" (e.g., Confidence Handoff).
+## 1. PRD TEMPLATE (Agentic Format)
 
-## ⚡ 2. PRIORITIZATION & BUSINESS ARBITRATION
-- **RICE Model:** Prioritize for Reach, Impact, Confidence, and Effort.
-- **Business Impact Arbitration (New):** When technical debt conflicts 
-  with feature velocity, the PM/BA must provide a "Business Value 
-  Score" to decide if a "Pragmatic Patch" is acceptable over a "Clean 
-  Refactor".
-- **North Star Metric:** Align features with a single outcome.
+Use this template when creating or refining requirements:
 
-## ✅ 3. EXECUTION & GHERKIN (Declarative First)
-- **Intent over UI:** Write Gherkin focusing on *Intent* ("When the user 
-  requests...").
-- **Probabilistic Verification:** Use range-based assertions for AI tasks.
+```markdown
+# PRD: <Feature Name>
+Date: <YYYY-MM-DD> | Author: <name> | Status: Draft
 
-## 📊 4. AI OBSERVABILITY & KPIS
-- **Drift & Bias Monitoring:** Define KPIs for monitoring performance 
-  post-launch.
-- **Global Constraints:** Refer to `@common-rules` for global constraints (80-column wrapping).
+## Problem Statement
+What user problem does this solve? Why now?
 
+## Success Metrics (North Star)
+- Primary KPI: <measurable outcome>
+- Secondary: <supporting metrics>
+
+## User Stories
+- As a <role>, I want <action>, so that <benefit>.
+- As a <role>, I want <action>, so that <benefit>.
+
+## Acceptance Criteria (Gherkin)
+Given <precondition>
+When <action>
+Then <expected result>
+
+## Scope
+### In Scope
+- <feature 1>
+- <feature 2>
+
+### Out of Scope
+- <explicitly excluded items>
+
+## Technical Constraints
+- Must work with existing <system/API/pattern>.
+- Must respect current <architecture/stack>.
+
+## Failure Modes
+- What happens when <system fails>?
+- What happens when <invalid input>?
+- Recovery strategy: <fallback behavior>.
+
+## Open Questions
+- <unresolved decisions>
+```
+
+## 2. PRIORITIZATION (RICE)
+
+Score features using RICE before committing resources:
+
+| Factor       | Scale      | Question                    |
+|--------------|------------|-----------------------------|
+| **Reach**    | Users/quarter | How many users affected?  |
+| **Impact**   | 0.25-3     | How much value per user?    |
+| **Confidence** | 0-100%  | How certain are we?         |
+| **Effort**   | Person-months | How much work?            |
+
+**Score = (Reach × Impact × Confidence) / Effort**
+
+Use this to decide between competing features or to justify
+"Pragmatic Patch" vs "Clean Refactor" when tech debt conflicts
+with velocity.
+
+## 3. ACCEPTANCE CRITERIA STANDARDS
+
+- **Intent over UI:** Write Gherkin focusing on user intent
+  ("When the user requests...") not UI mechanics.
+- **Testable:** Every criterion must be verifiable by an
+  automated test or clear manual step.
+- **Edge cases:** Include negative paths and error scenarios.
+- **No ambiguity:** Avoid words like "should", "might",
+  "appropriate". Use "MUST", "MUST NOT", "exactly".
+
+## 4. REQUIREMENT-CODE ALIGNMENT
+
+- **Traceability:** Each user story maps to specific files
+  and test cases.
+- **Scope discipline:** Flag "scope creep" immediately if
+  implementation exceeds the original PRD intent.
+- **Local compliance:** Requirements MUST respect existing
+  architectural constraints and legacy code realities.

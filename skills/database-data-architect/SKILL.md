@@ -1,40 +1,76 @@
 ---
 name: database-data-architect
-description: Lead Database & Data Architect. Specializes in SQL Optimization, 
-             Safe Migrations, Redis Caching, and ORM Governance.
+description: >-
+  Database and data architect. Covers SQL optimization, safe
+  migrations, Redis caching, ORM governance, and mobile-local
+  databases (SQLite, Drift, Floor).
 ---
-# 🗄️ Lead Database & Data Architect Protocol (Sovereign v9.0)
+# Database & Data — Architecture Protocol
 
-You are the Lead Database Architect. Your mission is to design scalable, secure,
-and high-performance database architectures with zero downtime.
+This skill governs all database design, querying, migrations,
+and caching decisions.
 
 ---
 
-## 🏗️ 1. SCHEMA DESIGN & INDEXING STANDARDS
-- **Normalization vs Denormalization:** Prefer Normalization (up to 3NF) for transactional data (OLTP). Denormalize only for read-heavy hotspots or OLAP, backed by an explicit cache invalidation strategy.
-- **Indexing Rules:**
-    - Always index foreign keys and columns frequently used in `WHERE`, `JOIN`, and `ORDER BY` clauses.
-    - Audit for redundant or unused indexes to prevent write performance drops.
-    - Use partial/filtered indexes for sparse columns.
+## 1. SCHEMA DESIGN
 
-## ⚡ 2. MIGRATION SAFETY & ZERO DOWNTIME
-- **Non-Blocking Alterations:** NEVER run migrations that lock tables in production (e.g., adding a column with a default value to a huge table). Use multi-step migrations instead:
-    1. Add the column without constraints or default values.
-    2. Backfill existing rows in small batches.
-    3. Add constraints/indexes with non-blocking commands (e.g., `CONCURRENTLY` in PostgreSQL).
-- **Fallback Procedures:** Every migration script MUST contain a tested rollback (`down`) procedure.
+- **Normalization:** Prefer up to 3NF for transactional data
+  (OLTP). Denormalize only for read-heavy hotspots with
+  explicit cache invalidation strategy.
+- **Indexing rules:**
+  - Always index foreign keys and frequent `WHERE`/`JOIN`/
+    `ORDER BY` columns.
+  - Audit for redundant or unused indexes.
+  - Use partial/filtered indexes for sparse columns.
+- **Naming:** Consistent, lowercase, snake_case for tables
+  and columns. Plural table names.
 
-## 💾 3. ORM GOVERNANCE & REDIS CACHING
-- **ORM Optimization:** Prevent the `N+1` query problem. Proactively enforce eager loading (`joinedload` or `selectinload` in SQLAlchemy).
-- **Caching (Redis):** 
-    - Cache heavy, slow-changing queries (e.g., configurations, product lists).
-    - Set explicit Time-To-Live (TTL) values for all cached items to prevent stale data spikes.
-    - Use Cache-Aside pattern for transactional data.
+## 2. MIGRATION SAFETY (Zero Downtime)
 
-## ✅ 4. COMPLIANCE & QUALITY GATE
-1. **Explain Audit:** Run `EXPLAIN ANALYZE` on any query that joins $>3$ tables or runs in a hot path.
-2. **Migration Dry Run:** Ensure all migrations are dry-run tested on a staging backup.
-3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+Non-blocking migration workflow:
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+1. Add column WITHOUT constraints or defaults.
+2. Backfill existing rows in small batches.
+3. Add constraints with non-blocking commands
+   (e.g., `CREATE INDEX CONCURRENTLY` in PostgreSQL).
+4. Every migration MUST have a tested rollback (`down`).
+
+**Never** run table-locking migrations in production
+(e.g., adding a default value to a large table in one step).
+
+## 3. ORM GOVERNANCE
+
+- **Prevent N+1:** Enforce eager loading (`joinedload` /
+  `selectinload` in SQLAlchemy, `includes` in ActiveRecord).
+- **Query audit:** Run `EXPLAIN ANALYZE` on any query that
+  joins > 3 tables or runs in a hot path.
+- **Raw SQL escape hatch:** When ORM generates inefficient
+  queries, write raw SQL but keep it in the repository layer.
+
+## 4. MOBILE-LOCAL DATABASES
+
+For Flutter/mobile projects:
+
+- **Drift (formerly Moor):** Preferred for type-safe,
+  reactive SQLite access in Dart. Use DAOs for organization.
+- **Floor:** Alternative with annotation-based approach
+  (similar to Room on Android).
+- **SQLite best practices:**
+  - Use WAL mode for concurrent reads.
+  - Keep schema versioning in migration files.
+  - Index columns used in frequent queries.
+  - Use transactions for batch operations.
+
+## 5. CACHING (Redis)
+
+- Cache slow-changing, heavy queries (configs, product lists).
+- Set explicit TTL for all cached items.
+- Use Cache-Aside pattern for transactional data.
+- Invalidate on write — never serve stale critical data.
+
+## 6. QUALITY GATE
+
+1. `EXPLAIN ANALYZE` on all hot-path queries.
+2. Migration dry-run tested on staging backup.
+3. Rollback procedure tested for every migration.
+4. No N+1 queries in code review.

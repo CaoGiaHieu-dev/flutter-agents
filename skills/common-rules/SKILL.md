@@ -1,245 +1,95 @@
 ---
 name: common-rules
-description: Global project rules, coding standards, legacy constraints,
-             and Real-Time Code Cleanup Standards (v2.0).
+description: >-
+  Global coding standards, legacy constraints, and quality
+  metrics. Auto-loaded as baseline for all other skills.
+  See references/ for anti-pattern examples and cleanup
+  report templates.
 ---
-# 🌐 Global Project Rules & Legacy Constraints (v2.0)
+# Global Project Rules & Coding Standards
 
-This protocol defines the absolute foundation rules for all developers
-and AI agents. It now includes **Real-Time Code Cleanup Standards**.
-
----
-
-## 📏 1. THE 80-COLUMN WRAPPING MANDATE
-
-- **Wrapping Rule:** All markdown documentation, instructions, and
-  source code files (where feasible, especially Dart, Python, C++,
-  Swift comments) MUST wrap strictly at **80 columns**.
-- **Reasoning:** Keeps files easily readable in terminal split-panes
-  and side-by-side git diff tools.
+These rules apply to ALL code changes across all languages.
+Every specialist skill inherits these constraints.
 
 ---
 
-## 🛡️ 2. LOCAL-FIRST & LEGACY COMPLIANCE
+## 1. LOCAL-FIRST COMPLIANCE
 
-- **Local Supremacy:** Local project rules (formatting, directory
-  structures, naming conventions, indentation spaces) ALWAYS override
-  general industry "Best Practices".
-- **Legacy Preservation:** Respect and preserve existing code. NEVER
-  refactor, reorganize, or rewrite legacy code unless explicitly
-  directed by direct user mandate.
-- **Single-Inquiry Protocol:** If you suspect an upgrade or cleanup is
-  beneficial, suggest it ONCE. If user denies or ignores, proceed
-  without asking again.
+- **Local DNA supremacy:** Local project conventions (formatting,
+  naming, indentation, directory structure) ALWAYS override
+  general "best practices".
+- **Legacy preservation:** NEVER refactor or reorganize existing
+  code unless explicitly directed by the user.
+- **Single-inquiry protocol:** If you suspect an improvement,
+  suggest it ONCE. If the user denies or ignores, proceed
+  without re-suggesting.
 
----
+## 2. CODE QUALITY METRICS
 
-## 🏛️ 3. IN-CODE ADRs & DEBT TRACKING
+Every code submission MUST satisfy:
 
-- **Architectural Debt Notation:** If deviation from global clean coding
-  standards (like SOLID) is necessary to respect local DNA, add comment:
-  ```
-  // ARCH-DEBT: <Brief explanation> [v2.0]
-  // TODO: <Future remediation path>
-  // IMPACT: <Files affected>
-  ```
-- **No Cascade Refactoring:** Do NOT let small change trigger cascade
-  across multiple files (the "Scout Rule" compromise).
+| Metric                  | Threshold      |
+|-------------------------|----------------|
+| Unused imports          | 0              |
+| Dead code paths         | 0              |
+| Cyclomatic complexity   | ≤ 10/function  |
+| Function length         | ≤ 30 lines     |
+| File length             | ≤ 200 lines    |
+| Parameter count         | ≤ 4            |
+| Magic numbers           | 0              |
+| Type annotations missing| 0              |
+| Nesting depth           | ≤ 3 levels     |
+| God class/widget size   | ≤ 200 lines    |
 
----
+If any metric is violated, fix it before submission.
+See `references/anti_patterns.md` for examples and fixes.
 
-## 🧹 4. REAL-TIME CODE CLEANUP STANDARDS (NEW - v2.0)
+## 3. MODULAR CODE SPLITTING
 
-### 4.1 Code Quality Metrics
+- **Directory isolation:** Separate by domain layer and feature.
+  - Shared helpers → `lib/common/` or `lib/utils/`.
+  - Reusable widgets → `lib/widgets/` or `lib/components/`.
+  - Feature code → `lib/features/<feature_name>/`.
+- **Single-responsibility files:** One primary class per file.
+- **Function decomposition:** If a function does multiple things
+  (fetch + format + setState), extract into named helpers.
 
-Every codebase submission MUST track:
+## 4. PACKAGE & DEPENDENCY GOVERNANCE
+
+- **Verify before adding:** Use MCP tools (`pub_dev_search`,
+  `pub`) or web search to check latest versions, changelogs,
+  and breaking changes BEFORE adding any dependency.
+- **Version locking:** Pin versions in manifests (`pubspec.yaml`,
+  `package.json`, `requirements.txt`) unless ranges are
+  explicitly approved.
+- **No guessing APIs:** If uncertain about an API shape, look
+  it up. Never assume based on memory.
+
+## 5. ERROR HANDLING & NULL SAFETY
+
+- **No unsafe operators:** Avoid `!` (Dart/Kotlin/Swift) unless
+  compile-time proven safe.
+- **Mounted checks:** Always verify state readiness (`mounted`
+  in Flutter, lifecycle in Android/iOS) before async updates.
+- **Either/Result pattern:** For expected domain failures, use
+  explicit error containers instead of throwing.
+
+## 6. ARCHITECTURAL DEBT TRACKING
+
+When deviating from clean coding standards to respect local DNA:
 
 ```
-MANDATORY METRICS:
-- Unused Imports Count:        ≤ 0 (must remove)
-- Dead Code Paths:             ≤ 0 (must document/remove)
-- Cyclomatic Complexity:       ≤ 10 per function
-- Function Length:             ≤ 30 lines (must extract/split)
-- File Length (LOC):           ≤ 200 lines (must split into subfiles)
-- Parameter Count:             ≤ 4 (suggest param object)
-- Magic Numbers:               ≤ 0 (must use named constants)
-- Test Coverage (Domain):      ≥ 70%
-- Type Annotations Missing:    ≤ 0 (must annotate)
-- Nesting Depth (if/loops):   ≤ 3 levels
-- God Class/Widget Size:       ≤ 200 lines
-
-SCORING:
-- All metrics green → Grade A (Excellent)
-- 1-2 metrics yellow → Grade B (Good, fix soon)
-- 3+ metrics yellow → Grade C (Fix before merge)
-- Any metric red → BLOCK (Fix required)
+// ARCH-DEBT: <Brief explanation>
+// TODO: <Future remediation path>
 ```
 
-### 4.2 Anti-Pattern Dictionary
+Do NOT let a small change cascade across multiple files
+(the "Scout Rule" compromise: leave it slightly cleaner,
+but do not trigger a rewrite).
 
-**Developers MUST NOT emit these patterns:**
+## 7. CONFLICT RESOLUTION
 
-```
-PATTERN: Magic Numbers
-EXAMPLE: if (status == 200) { ... }
-CLEANUP: const int SUCCESS_STATUS = 200;
-         if (status == SUCCESS_STATUS) { ... }
-
----
-
-PATTERN: Nested Callbacks (>2 levels)
-EXAMPLE: api.get().then((data) {
-           process(data).then((result) {
-             save(result).then((ok) { ... })
-           })
-         })
-CLEANUP: Use async/await:
-         final data = await api.get();
-         final result = await process(data);
-         await save(result);
-
----
-
-PATTERN: Unused Import
-EXAMPLE: import 'dart:async'; // never used
-CLEANUP: Remove line
-
----
-
-PATTERN: God Widget (>300 lines)
-EXAMPLE: class HomePage extends StatefulWidget {
-           // 450 lines of UI + logic
-         }
-CLEANUP: Extract to:
-         - HomePageAppBar (80 lines)
-         - HomePageContent (120 lines)
-         - HomePageFooter (90 lines)
-         - HomePage (70 lines + composition)
-
----
-
-PATTERN: Hardcoded String
-EXAMPLE: Text('Welcome, User!')
-CLEANUP: Text(AppStrings.welcomeUser)
-         // In localization/constants
-
----
-
-PATTERN: Missing Null Check
-EXAMPLE: user.profile.name  // risky
-CLEANUP: user?.profile?.name ?? 'Unknown'
-         // or use Either<Failure, String>
-
----
-
-PATTERN: Unused Variable
-EXAMPLE: final result = compute();
-         print('done') // never use result
-CLEANUP: Remove line or:
-         final _ = compute(); // intentional ignore
-
----
-
-PATTERN: Missing Error Handling
-EXAMPLE: api.fetch().then((data) => update(data))
-CLEANUP: api.fetch()
-           .then((data) => update(data))
-           .catchError((e) => handleError(e))
-```
-
-### 4.3 Auto-Cleanup Workflow
-
-**When QA or developers detect cleanup opportunities:**
-
-1. **SCAN Phase:** Categorize by risk level
-2. **REPORT Phase:** Group by file/category
-3. **APPROVE Phase:** User approves bulk cleanup
-4. **APPLY Phase:** Auto-apply safe changes
-5. **COMMIT Phase:** Single cleanup commit with rationale
-
-### 4.4 Modular Code Splitting Standards
-
-All development tasks MUST proactively split logic instead of aggregating:
-- **Directory Isolation:** Separate code by domain layer and feature type:
-  - Common helpers go to `lib/common/` or `lib/utils/`.
-  - Reusable visual widgets go to `lib/widgets/` or `lib/components/`.
-  - Feature-specific code goes to `lib/features/<feature_name>/`.
-- **Single-Responsibility Files:** A file must only contain one primary
-  class or widget. Do not bundle multiple classes/widgets into one file.
-- **Function Decomposition:** Keep functions below 30 lines. If a function
-  does more than one thing (e.g. data fetching + formatting + state setting),
-  extract the steps into well-named private helper functions.
-
----
-
-## 📦 5. PACKAGE & FRAMEWORK GOVERNANCE (NEW)
-
-To prevent API compatibility errors and version mismatch regressions:
-- **Mandatory Changelog Auditing:** Before adding or upgrading any
-  package/framework, the agent MUST inspect the package's changelog, release
-  notes, and breaking changes.
-- **MCP & Tooling First:** The agent MUST use available MCP tools (such as
-  `pub`, `pub_dev_search`) or web search to find correct, compatible package
-  versions and verify recent API modifications. Never guess APIs.
-- **Strict Version Locking:** Pin package versions in the package manifest
-  (e.g., `pubspec.yaml`, `package.json`, `requirements.txt`) unless a range
-  is explicitly approved.
-
----
-
-## 🔒 6. ZERO-TRUST LOGIC & ERROR HANDLING
-
-- **Null Safety:** Avoid unsafe operators (like `!` in Dart/Kotlin/
-  Swift) unless compile-time proven safe.
-- **State Check:** Always check state readiness (e.g., `mounted`
-  check in Flutter/iOS/Android widgets) before executing async state
-  updates.
-- **Either Pattern:** For expected domain failures, prefer explicit
-  error container (`Result` or `Either<Failure, Success>`) instead
-  of throwing.
-
----
-
-## 📊 7. CLEANUP REPORTS & METRICS (NEW - v2.0)
-
-After cleanup, MUST generate report:
-
-```markdown
-## Code Cleanup Report
-Generated: 2024-01-15 | By: @flutter-expert + @qa-code-review
-
-### Issues Fixed
-✅ Removed 7 unused imports
-✅ Extracted 12 magic numbers to constants
-✅ Split HomePage (450 LOC) → 4 files
-✅ Added 5 missing null checks
-✅ Flattened 3 nested callbacks to async/await
-
-### Metrics Improvement
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Avg Function Length | 42 LOC | 28 LOC | ↓33% |
-| Max Nesting Depth | 5 | 3 | ↓40% |
-| Cyclomatic Complexity | 14 | 9 | ↓36% |
-| Test Coverage | 65% | 78% | ↑20% |
-| Unused Variables | 8 | 0 | ✅ |
-
-### Impact Assessment
-- No breaking changes
-- No behavior modifications
-- File organization improved
-- Maintainability: +25%
-
-### Grade Progression
-Before: B (7.2/10)
-After:  A (8.9/10) ⭐
-```
-
----
-
-## 🛡️ GLOBAL COMPLIANCE
-
-- All code MUST comply with this v2.0 standard
-- Tools MUST enforce metrics automatically
-- User approval required only for changes >5 LOC or behavioral
-  modifications
+- `USER DIRECTIVE` > `LOCAL PROJECT DNA` > `BEST PRACTICES`
+- If a change risks breaking > 2 unrelated modules → STOP
+  and ask the user before proceeding.
+- Respect prior user denials for similar changes.

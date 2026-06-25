@@ -1,45 +1,68 @@
 ---
 name: ios-swift-architect
-description: Principal iOS & Swift Architect. Expert in SwiftUI, TCA Modern, 
-             Swift 6.1 Concurrency, and Region-Based Isolation.
+description: >-
+  iOS & Swift architect. Covers SwiftUI, TCA (Composable
+  Architecture), Swift 6 concurrency (actors, structured
+  concurrency), SPM, and VisionOS readiness.
 ---
-# 🍎 Principal iOS & Swift Architect Protocol (Next-Gen v7.0)
+# iOS & Swift — Expert Development Protocol
 
-This protocol ensures 100% adherence to Apple's modern standards and the 
-latest evolution of **Swift 6.1**.
+This skill governs all iOS and Swift development.
 
 ---
 
-## 🧠 1. MODERNITY & CONCURRENCY DETECTION
-- **Swift 6.1 Specialization (New):** Enable **Region-Based Isolation**. 
-  Use `sending` parameters to pass non-Sendable results across boundaries 
-  without copying when the compiler can prove isolation.
-- **Framework Discovery:** SwiftUI (Primary) vs UIKit.
+## 1. PROJECT DNA DETECTION
 
-## 🏗️ 2. MODERN SWIFT & TCA MANDATES (2025 Standard)
-- **The Reducer Macro:** MANDATORY use of `@Reducer`.
-- **Dependency Injection:** Use the `@Dependency` property wrapper.
-- **Action Decomposition:** Categorize actions into `view`, `internal`, and 
-  `delegate`.
+Scan `Package.swift` or `.xcodeproj` to identify:
 
-## ⚡ 3. PERFORMANCE & TYPED SAFETY
-- **Typed Throws (New):** Use Swift 6.1 **Typed Throws** for explicit, 
-  compile-time guaranteed error handling. Avoid raw `throws Error`.
-- **Swift 6 Concurrency:** Use `MainActor` for all UI updates. Prefer 
-  `Async/Await` over Combine.
-- **Memory Integrity:** Strictly audit for retain cycles in `NavigationStack`.
+- **UI:** SwiftUI (modern) vs UIKit (legacy).
+- **Architecture:** TCA vs MVVM vs MVC.
+- **Dependency manager:** SPM (preferred) vs CocoaPods.
+- **Swift version:** Check for Swift 6 strict concurrency.
 
-## 🎨 4. UI & DESIGN SYSTEM
-- **Composition:** Decompose large views into small, `Identifiable` subviews.
+Match the existing stack — do not introduce competing patterns.
+
+## 2. MODERN SWIFT & CONCURRENCY
+
+- **Swift 6 Concurrency:**
+  - Enable strict concurrency checking.
+  - Use `@MainActor` for all UI updates.
+  - Prefer `async/await` over Combine for new code.
+  - Use `sending` parameters for cross-isolation transfers
+    (region-based isolation).
+- **Typed Throws:** Use typed throws for explicit,
+  compile-time error handling. Avoid raw `throws Error`.
+- **Type safety:** Leverage `Codable` with custom coding keys.
+  Use `@Observable` macro (iOS 17+) over `ObservableObject`.
+
+## 3. TCA (COMPOSABLE ARCHITECTURE)
+
+When TCA is detected:
+
+- MANDATORY: Use `@Reducer` macro.
+- Use `@Dependency` property wrapper for DI.
+- Decompose actions into `view`, `internal`, `delegate`.
+- Test with `TestStore` using `.exhaustive` exhaustivity.
+
+## 4. SwiftUI BEST PRACTICES
+
+- **Composition:** Decompose large views into small,
+  `Identifiable` subviews (≤ 40 lines per view body).
 - **Previews:** Use `#Preview` macro for all UI components.
-- **Spatial Readiness:** Design with **VisionOS** padding and transparency 
-  guidelines in mind.
+- **Navigation:** Use `NavigationStack` with typed destinations.
+  Audit for retain cycles in navigation closures.
+- **VisionOS readiness:** Consider spatial padding and
+  transparency guidelines when designing reusable components.
 
-## ✅ 5. EXECUTION QUALITY GATE
-1. **Linter:** Zero warnings from `SwiftLint`.
-2. **Tests:** Exhaustive `TestStore` validation with `exhaustivity: .exhaustive`.
-3. **Global Constraints:** Inherit all global constraints from `@common-rules`.
+## 5. SWIFT PACKAGE MANAGER (SPM)
 
-## 🛡️ GLOBAL COMPLIANCE
-- Refer to `@common-rules` for standard guidelines, including the 80-column rule, local DNA supremacy, and legacy code preservation mandates.
+- Prefer SPM over CocoaPods for new dependencies.
+- Pin package versions to exact or minor ranges.
+- Use local packages for modularizing large projects.
 
+## 6. QUALITY GATE
+
+1. `SwiftLint` → zero warnings.
+2. `TestStore` validation for all TCA features.
+3. No retain cycles in closures (use `[weak self]`).
+4. All `@Sendable` requirements satisfied.
